@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faqih Lakaisha Putra | Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="intro-splash" class="splash-overlay-3d">
+        <div class="bg-blob blob-3" style="top: 15%; left: 35%; width: 300px; height: 300px; z-index: -1; opacity: 0.6;"></div>
+        
+        <div class="splash-card-compact-3d">
+            <div class="corner-accent-top"></div>
+            
+            <div class="compact-info-3d">
+                <div class="tech-badge-new">
+                    <span class="pulse-dot-magenta"></span> DEVELOPER PROFILE
+                </div>
+                
+                <h1 class="compact-name-new">Lakaisha<span class="text-gradient">.</span></h1>
+                
+                <div class="compact-data-list">
+                    <div class="data-item">
+                        <span class="item-label">HOBI // MINAT</span>
+                        <span class="item-value">Main Rubik's Cube</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="item-label">STATUS // TINGKAT</span>
+                        <span class="item-value highlight-magenta">Junior Dev (Masih Belajar)</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="item-label">INSTITUSI BASE</span>
+                        <span class="item-value">Univ. Lampung</span>
+                    </div>
+                </div>
+                
+                <button class="btn-portal-glass" onclick="masukKePortfolio()">CEK SELENGKAPNYA</button>
+            </div>
+
+            <div class="compact-photo-3d">
+                <div class="photo-frame-compact">
+                    <img src="assets/gambar-faqih.jpeg" alt="Faqih Lakaisha">
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="background-container">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <header class="navbar">
+        <nav class="nav-container">
+            <div class="logo">Lakaisha<span class="text-gradient">.</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/skills.html">Skills</a></li>
+                <li><a href="pages/languages.html">Languages</a></li>
+                <li><a href="pages/achievements.html">Achievements</a></li>
+                <li><a href="pages/projects.html">Projects</a></li>
+                <li><a href="pages/experience.html">Experience</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-section hero-section">
+        <div class="hero-content fade-in">
+            <h2 style="color: var(--accent-magenta); letter-spacing: 2px; font-size: 1rem; margin-bottom: 1rem;">WELCOME TO MY SPACE</h2>
+            <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem;">Hi, I'm <br><span class="text-gradient">Faqih Lakaisha Putra</span></h1>
+            <p style="font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 500px;">
+                Computer Science Student. Passionate about Web Development, Data Science, and creating logical solutions.
+            </p>
+            <div style="display: flex; gap: 1.5rem;">
+                <button onclick="window.location.href='pages/projects.html'" class="btn-primary">Explore Projects</button>
+            </div>
+        </div>
+        
+        <div class="hero-image fade-in">
+            <div class="speech-bubble">
+                "in another life aku gamau masuk ilmu komputer"
+            </div>
+            <div class="glass-sphere" style="background-image: url('assets/gambar-faqih.jpeg'); background-size: cover; background-position: center; border: 3px solid rgba(255, 255, 255, 0.4);">
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const splash = document.getElementById('intro-splash');
+
+        // 1. Mengecek apakah user SUDAH melihat splash screen sebelumnya di sesi ini
+        if (sessionStorage.getItem('splashSudahDilihat') === 'true') {
+            // Jika sudah, sembunyikan splash screen secara instan (tanpa animasi)
+            splash.style.display = 'none';
+        }
+
+        // 2. Fungsi saat tombol diklik
+        function masukKePortfolio() {
+            // Simpan status ke browser bahwa user sudah melewati splash screen
+            sessionStorage.setItem('splashSudahDilihat', 'true');
+            
+            // Jalankan animasi keluar
+            splash.classList.add('exit-animation-3d');
+            
+            // Hapus dari layar sepenuhnya setelah animasi selesai
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 800);
+        }
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>
