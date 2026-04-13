@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Portfolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Ukuran lebih gede dikit aja buat Balamcubes */
+        .main-job {
+            transform: scale(1.03);
+            border: 1px solid var(--accent-magenta) !important;
+            margin-bottom: 3rem !important;
+        }
+        .pulse-dot {
+            width: 8px; height: 8px;
+            background: var(--accent-magenta);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <header class="navbar">
+        <nav class="nav-container">
+            <div class="logo">Lakaisha<span class="text-gradient">.</span></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="languages.html">Languages</a></li>
+                <li><a href="achievements.html">Achievements</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html" class="active">Experience</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-section">
+        <h1 class="section-title text-gradient fade-in">My Experience</h1>
+
+        <div class="achievement-list fade-in">
+            
+            <div class="glass-card achievement-row glow-hover main-job">
+                <div class="achievement-photo-side">
+                    <img src="/assets/kerja-balam.png" alt="Balamcubes Work" class="achievement-img">
+                </div>
+                <div class="achievement-info-side">
+                    <div class="info-header">
+                        <span class="achievement-category" style="background: rgba(207, 90, 240, 0.15); color: var(--accent-magenta);">
+                            <span class="pulse-dot"></span> Still Active
+                        </span>
+                        <h3 class="achievement-title">Content Creator & Talent</h3>
+                    </div>
+                    <h4 style="color: var(--text-dim); margin-bottom: 10px;">Balamcubes Rubik's Shop</h4>
+                    <p class="achievement-desc">
+                        My main job is making Rubik's videos for Balamcubes. I handle everything from writing the scripts to editing the final video. 
+                        I've made <strong>400+ short videos</strong> so far and they’ve reached <strong>millions of views</strong> across all platforms.
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass-card achievement-row glow-hover">
+                <div class="achievement-photo-side">
+                    <img src="/assets/gambar-fanztime.png" alt="Fanztime Event" class="achievement-img">
+                </div>
+                <div class="achievement-info-side">
+                    <div class="info-header">
+                        <span class="achievement-category" style="background: rgba(138, 43, 226, 0.15); color: var(--accent-purple);">Community</span>
+                        <h3 class="achievement-title">Event Organizer</h3>
+                    </div>
+                    <h4 style="color: var(--text-dim); margin-bottom: 10px;">Fanztime Online Competition</h4>
+                    <p class="achievement-desc">
+                        I've organized <strong>11 online Rubik's competitions</strong> through Fanztime. Managed over <strong>500+ participants</strong> from all over Indonesia and handled all the match brackets and logistics.
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass-card achievement-row glow-hover">
+                <div class="achievement-photo-side">
+                    <img src="/assets/panitia-karate.png" alt="Karate Committee" class="achievement-img">
+                </div>
+                <div class="achievement-info-side">
+                    <div class="info-header">
+                        <span class="achievement-category" style="background: rgba(77, 77, 255, 0.15); color: var(--accent-blue);">Sports</span>
+                        <h3 class="achievement-title">Tournament Committee</h3>
+                    </div>
+                    <h4 style="color: var(--text-dim); margin-bottom: 10px;">Karate Championships</h4>
+                    <p class="achievement-desc">
+                        Worked as part of the committee for two Karate tournaments. Mostly helped with organizing participants and making sure the matches ran smoothly.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

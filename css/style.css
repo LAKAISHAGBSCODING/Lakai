@@ -1,0 +1,478 @@
+/* =======================================================
+   1. PENGATURAN SCROLLBAR
+   ======================================================= */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* ANTI FLASHBANG FIXED: HTML gelap permanen, body nyesuain */
+html {
+    background-color: #06020d !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* =======================================================
+   2. INTI VARIABEL & RESET
+   ======================================================= */
+:root {
+    --bg-base: #06020d; 
+    --accent-purple: #8a2be2;
+    --accent-magenta: #cf5af0;
+    --accent-blue: #4d4dff;
+    
+    --glass-bg: rgba(25, 10, 45, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
+    
+    --text-main: #ffffff;
+    --text-dim: #a09ab0;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+/* Animasi body tetap dipertahankan, transparan sedetik awal */
+body {
+    background-color: transparent;
+    color: var(--text-main);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden; 
+    line-height: 1.6;
+    width: 100%;
+    animation: pageAppear 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0; 
+}
+
+@keyframes pageAppear {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================================
+   3. ANIMATED BACKGROUND
+   ======================================================= */
+.background-container {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--bg-base);
+}
+
+.bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: moveBlob 20s infinite alternate ease-in-out;
+}
+
+.blob-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -10%; left: -10%; }
+.blob-2 { width: 500px; height: 500px; background: var(--accent-blue); bottom: -20%; right: -10%; animation-delay: -5s; animation-duration: 25s; }
+.blob-3 { width: 300px; height: 300px; background: var(--accent-magenta); top: 40%; left: 50%; animation-delay: -10s; opacity: 0.3; }
+
+@keyframes moveBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+/* =======================================================
+   4. NAVIGASI (MODERN CLEAR GLASS PILL)
+   ======================================================= */
+.navbar {
+    position: fixed;
+    top: 25px; left: 50%; transform: translateX(-50%); 
+    width: 90%; max-width: 1000px; z-index: 1000;
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    border-radius: 50px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.05);
+    transition: all 0.4s ease;
+}
+
+.nav-container {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2.5rem; margin: 0 auto;
+}
+
+.logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 1px; }
+.nav-links { display: flex; list-style: none; gap: 2.5rem; }
+.nav-links a {
+    text-decoration: none; color: var(--text-dim);
+    font-weight: 500; font-size: 1rem;
+    transition: all 0.3s ease; position: relative;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text-main); text-shadow: 0 0 10px var(--accent-magenta); }
+
+/* =======================================================
+   5. GLASSMORPHISM & SISTEM GLOW
+   ======================================================= */
+.glass-panel, .glass-card {
+    background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight);
+    border-radius: 20px; padding: 2rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative; overflow: hidden;
+}
+
+.glow-hover:hover {
+    transform: translateY(-8px); border-color: var(--accent-magenta);
+    box-shadow: 0 10px 30px rgba(207, 90, 240, 0.2), inset 0 0 20px rgba(138, 43, 226, 0.1);
+}
+
+/* =======================================================
+   6. TIPOGRAFI & LAYOUT DASAR
+   ======================================================= */
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple), var(--accent-blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-size: 200% auto; animation: gradientText 5s linear infinite;
+}
+
+@keyframes gradientText { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+.glow-text { text-shadow: 0 0 20px rgba(207, 90, 240, 0.4); }
+.page-section { padding: 140px 5% 80px; max-width: 1200px; margin: 0 auto; }
+.section-title { font-size: 3rem; text-align: center; margin-bottom: 3rem; }
+
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* =======================================================
+   7. HALAMAN UTAMA (INDEX.HTML) - HERO SECTION
+   ======================================================= */
+.hero-section {
+    min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 4rem; padding-top: 80px; max-width: 1200px; margin: 0 auto; padding-left: 5%; padding-right: 5%;
+}
+
+.hero-content { flex: 1; min-width: 300px; }
+.sub-heading { color: var(--text-dim); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; letter-spacing: 2px; text-transform: uppercase; }
+.main-heading { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+.hero-desc { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 500px; }
+.cta-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+    border: none; padding: 14px 32px; color: white; border-radius: 30px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+}
+.glow-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 25px rgba(207, 90, 240, 0.5); }
+
+.btn-outline {
+    background: transparent; border: 1px solid var(--accent-magenta);
+    padding: 14px 32px; color: var(--text-main); border-radius: 30px; text-decoration: none;
+    font-weight: 600; transition: all 0.3s ease;
+}
+.btn-outline:hover { background: rgba(207, 90, 240, 0.1); box-shadow: inset 0 0 15px rgba(207, 90, 240, 0.3); }
+
+.glass-sphere {
+    width: 350px; height: 350px; border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 60px rgba(207, 90, 240, 0.4);
+    position: relative; z-index: 5;
+}
+.inner-glow { display: none; }
+
+.speech-bubble {
+    position: absolute; top: -40px; right: -100px;
+    background: rgba(25, 10, 45, 0.7); backdrop-filter: blur(15px);
+    padding: 18px 25px; border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+    border: 1px solid var(--accent-magenta); color: var(--text-main);
+    font-size: 0.9rem; font-style: italic; max-width: 250px; text-align: center;
+    box-shadow: 0 10px 30px rgba(207, 90, 240, 0.2), inset 0 0 15px rgba(207, 90, 240, 0.1);
+    animation: floatBubbleModern 5s ease-in-out infinite; z-index: 10;
+}
+@keyframes floatBubbleModern { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-5px, -15px) rotate(1deg); } }
+
+/* =======================================================
+   8. GRID & TOMBOL FILTER
+   ======================================================= */
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+.filter-container { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+.filter-btn {
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-dim); padding: 10px 24px; border-radius: 30px;
+    cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px);
+}
+.filter-btn.active, .filter-btn:hover {
+    background: var(--accent-purple); color: white;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5); border-color: transparent;
+}
+
+/* =======================================================
+   9. HALAMAN SKILLS & LANGUAGES (KOTAK HORIZONTAL)
+   ======================================================= */
+.software-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+.skill-badge { display: flex; flex-direction: row; align-items: center; padding: 1.5rem; border-radius: 16px; cursor: default; gap: 15px; }
+.skill-icon {
+    flex-shrink: 0; width: 48px; height: 48px; max-width: 48px; max-height: 48px; 
+    object-fit: contain; object-position: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.05));
+}
+.badge-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.badge-text-row { display: flex; justify-content: space-between; align-items: center; }
+.badge-text-row span:first-child { font-size: 1rem; font-weight: 600; letter-spacing: 0.5px; color: var(--text-main); }
+.badge-text-row .skill-percent { font-size: 0.85rem; color: var(--text-dim); font-weight: 500; }
+.mini-progress { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; }
+.mini-progress-fill { height: 100%; border-radius: 10px; transition: width 1.5s ease-out; }
+.skill-badge:hover .skill-icon { transform: scale(1.15) translateY(-3px); filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.3)); }
+
+.soft-skill-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+.soft-skill-item { display: flex; align-items: center; padding: 2rem; }
+.skill-icon-wrapper {
+    flex-shrink: 0; width: 70px; height: 70px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05); border: 2px solid var(--accent-magenta);
+    display: flex; align-items: center; justify-content: center; margin-right: 2rem;
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05); transition: all 0.4s ease;
+}
+.skill-icon-wrapper svg { width: 35px; height: 35px; fill: var(--text-main); }
+.soft-skill-item:hover .skill-icon-wrapper { transform: scale(1.1) rotate(5deg); background: rgba(255, 255, 255, 0.1); box-shadow: 0 0 20px rgba(207, 90, 240, 0.4); }
+
+/* =======================================================
+   10. HALAMAN ACHIEVEMENTS (LIST KIRI FOTO, KANAN TEKS)
+   ======================================================= */
+.achievement-list { display: flex; flex-direction: column; gap: 2rem; max-width: 950px; margin: 0 auto; }
+.achievement-row { display: flex; flex-direction: row; align-items: center; padding: 1.5rem; gap: 2rem; border-left: 4px solid transparent; transition: all 0.4s ease; }
+.achievement-row:nth-child(1):hover { border-left-color: var(--accent-magenta); }
+.achievement-row:nth-child(2):hover { border-left-color: var(--accent-purple); }
+.achievement-row:nth-child(3):hover { border-left-color: var(--accent-blue); }
+.achievement-photo-side { width: 30%; height: 180px; flex-shrink: 0; position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--glass-border); }
+.achievement-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.achievement-row:hover .achievement-img { transform: scale(1.1); }
+.achievement-info-side { flex: 1; display: flex; flex-direction: column; gap: 0.8rem; }
+.info-header { display: flex; flex-direction: column; gap: 0.3rem; }
+.achievement-category { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: fit-content; }
+.achievement-title { font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
+.achievement-desc { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+
+/* =======================================================
+   11. HALAMAN PROJECTS (LIST KIRI EMBED FIX, KANAN TEKS)
+   ======================================================= */
+.project-list { display: flex; flex-direction: column; gap: 2.5rem; max-width: 1000px; margin: 0 auto; }
+.project-item { display: block; }
+
+.project-row {
+    display: flex; flex-direction: row; align-items: center;
+    padding: 1.5rem; gap: 2.5rem; transition: all 0.4s ease;
+}
+
+/* --- KOTAK VIDEO DIKUNCI MATI (UKURAN SAMA SEMUA) --- */
+.project-media-side {
+    width: 320px;      /* LEBAR FIX */
+    height: 180px;     /* TINGGI FIX */
+    flex-shrink: 0;    /* Mencegah kotak mengecil saat layar sempit */
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.8);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.project-media-side iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.project-info-side { flex: 1; display: flex; flex-direction: column; gap: 0.8rem; }
+.project-category-tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: fit-content; }
+.project-info-side h3 { font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin: 0; }
+.project-info-side p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+.project-tags-row { color: var(--accent-magenta); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; margin-top: 0.5rem; }
+
+/* =======================================================
+   12. RESPONSIVE DESIGN (MOBILE VIEW)
+   ======================================================= */
+@media (max-width: 768px) {
+    .navbar { top: 15px; width: 95%; }
+    .nav-links { display: none; }
+    
+    .main-heading { font-size: 2.5rem; }
+    .hero-section { text-align: center; justify-content: center; padding-top: 120px; }
+    .cta-group { justify-content: center; }
+    .glass-sphere { width: 250px; height: 250px; }
+    .speech-bubble { right: -10px; top: -50px; }
+    
+    .section-title { font-size: 2.2rem; }
+    .page-section { padding-top: 110px; }
+    
+    .soft-skill-item { flex-direction: column; text-align: center; }
+    .skill-icon-wrapper { margin-right: 0 !important; margin-bottom: 1rem; }
+    
+    .achievement-row { flex-direction: column; align-items: flex-start; padding: 1.2rem; gap: 1.2rem; }
+    .achievement-photo-side { width: 100%; height: 180px; }
+    
+    /* Project di Mobile */
+    .project-row { flex-direction: column; padding: 1.2rem; gap: 1.5rem; }
+    .project-media-side { 
+        width: 100%; 
+        height: 200px; 
+    }
+}
+
+/* =======================================================
+   14. SPLASH SCREEN (COMPACT 3D FLOATING & MIRING - UPDATED)
+   ======================================================= */
+/* Overlay dengan Perspektif 3D Nyata & BG Ungu Terang blob */
+.splash-overlay-3d {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: var(--bg-base); z-index: 9999; 
+    display: flex; justify-content: center; align-items: center;
+    /* Memberikan efek kedalaman 3D pada container */
+    perspective: 2000px;
+    transition: all 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+    overflow: hidden;
+}
+
+/* Kartu Compact 3D & Miring-Miring Halus (Mulus) */
+.splash-card-compact-3d {
+    display: flex; flex-direction: row; gap: 2rem; align-items: stretch;
+    background: rgba(20, 10, 35, 0.4); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px; padding: 2.5rem;
+    max-width: 650px; width: 92%; box-shadow: 0 30px 70px rgba(0,0,0,0.8);
+    position: relative;
+    
+    /* Aktifkan rendering 3D untuk anak-anaknya */
+    transform-style: preserve-3d;
+    
+    /* Animasi Ganda: Muncul (PopIn) dan Mengambang 3D (Float3DTilt) */
+    opacity: 0;
+    animation: popInNew 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards, 
+               float3DTilt 8s 1.5s ease-in-out infinite; /* Mulai miring mulus setelah muncul */
+}
+
+/* Efek Kilauan Cahaya Transparan pada Permukaan Kaca (Mulus) */
+.splash-card-compact-3d::after {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.06) 40%, transparent 60%);
+    transform: rotate(-20deg); pointer-events: none; z-index: 10;
+}
+
+/* ANIMASI MUNCUL BARU (Lebih Mulus & Skala Kecil) */
+@keyframes popInNew {
+    0% { opacity: 0; transform: scale(0.85) translateY(50px) rotateX(15deg); }
+    100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); }
+}
+
+/* ANIMASI MENGAMBANG & MIRING 3D (Mulus, Tidak Kaku, Dynamic) */
+@keyframes float3DTilt {
+    0%, 100% { transform: translateY(0) rotateX(1deg) rotateY(1deg); }
+    25% { transform: translateY(-15px) rotateX(-4deg) rotateY(5deg); }
+    50% { transform: translateY(-25px) rotateX(3deg) rotateY(-5deg); }
+    75% { transform: translateY(-10px) rotateX(5deg) rotateY(3deg); }
+}
+
+/* Elemen Hiasan Sudut */
+.corner-accent-top {
+    position: absolute; top: 0; right: 0; width: 45px; height: 45px;
+    border-right: 3px solid var(--accent-magenta); border-top: 3px solid var(--accent-magenta);
+    transform: translateZ(25px); /* Timbul sedikit */
+}
+
+/* -- KIRI: INFO PADAT -- */
+.compact-info-3d {
+    flex: 1.7; display: flex; flex-direction: column; justify-content: space-between;
+    transform: translateZ(40px); /* Efek timbul pada teks */
+}
+
+.tech-badge-new {
+    display: flex; align-items: center; gap: 7px; width: fit-content;
+    background: rgba(207, 90, 240, 0.1); border: 1px solid var(--accent-magenta);
+    color: var(--accent-magenta); padding: 5px 12px; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.pulse-dot-magenta { width: 6px; height: 6px; background: var(--accent-magenta); border-radius: 50%; box-shadow: 0 0 5px var(--accent-magenta); animation: pulse 1.5s infinite; }
+
+.compact-name-new {
+    font-size: 3rem; font-weight: 900; line-height: 1; color: var(--text-main); margin: 1rem 0; letter-spacing: -1px;
+}
+
+.compact-data-list {
+    display: flex; flex-direction: column; gap: 12px; margin-bottom: 2.5rem;
+}
+
+.data-item {
+    display: flex; flex-direction: column; gap: 3px;
+}
+
+.item-label { font-size: 0.65rem; color: var(--text-dim); font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+.item-value { font-size: 1.1rem; color: var(--text-main); font-weight: 600; letter-spacing: 0.5px; }
+.highlight-magenta { color: var(--accent-magenta); font-weight: 700; text-shadow: 0 0 10px rgba(207, 90, 240, 0.3); }
+
+/* Tombol Glassmorphism Mulus (Nggak Kaku) */
+.btn-portal-glass {
+    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 0; width: 100%; color: var(--text-main); font-size: 0.85rem; font-weight: 800; letter-spacing: 2.5px;
+    border-radius: 8px; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase; outline: none;
+    position: relative; overflow: hidden;
+}
+
+.btn-portal-glass::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    transition: all 0.6s ease;
+}
+
+.btn-portal-glass:hover {
+    background: rgba(207, 90, 240, 0.15); border-color: var(--accent-magenta); 
+    box-shadow: 0 8px 25px rgba(207, 90, 240, 0.4); transform: translateY(-3px); color: #fff;
+}
+.btn-portal-glass:hover::before { left: 100%; }
+
+/* -- KANAN: FOTO KECIL & EDGY (Tanpa Garis Gerak) -- */
+.compact-photo-3d {
+    flex: 1; position: relative; display: flex; align-items: center; justify-content: flex-end;
+    transform: translateZ(60px); /* Efek timbul paling tinggi pada foto */
+}
+
+.photo-frame-compact {
+    width: 180px; height: 250px; border-radius: 8px; overflow: hidden; position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 10px 10px 30px rgba(0,0,0,0.7);
+    /* Clip-path tajam dipertahankan agar ga pasaran */
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 85% 100%, 0 100%); 
+}
+.photo-frame-compact img { 
+    width: 100%; height: 100%; object-fit: cover; 
+    filter: grayscale(20%) contrast(1.1) brightness(0.95); 
+    transition: all 0.5s ease;
+}
+
+/* ANIMASI KELUAR 3D MULUS, KEREN & ELEGAN (Dipanggil oleh JavaScript) */
+.splash-overlay-3d.exit-animation-3d {
+    /* Pudar, mengecil pelan, berputar 3D, dan terangkat pelan */
+    opacity: 0;
+    transform: translateY(-60vh) scale(0.75) rotateX(-25deg) rotateY(15deg);
+    pointer-events: none;
+}
+
+/* RESPONSIF MOBILE KARTU 3D COMPACT */
+@media (max-width: 650px) {
+    .splash-card-compact-3d { flex-direction: column-reverse; padding: 2rem; gap: 2rem; align-items: center; border-radius: 8px;}
+    .compact-photo-3d { justify-content: center; width: 100%; transform: translateZ(40px); }
+    .photo-frame-compact { width: 140px; height: 190px; clip-path: none; border-radius: 8px; }
+    .compact-info-3d { width: 100%; text-align: center; transform: translateZ(30px); }
+    .compact-name-new { font-size: 2.5rem; }
+    .tech-badge-new { margin: 0 auto 1rem auto; }
+    .compact-data-list { text-align: left; background: rgba(0,0,0,0.25); padding: 15px; border-radius: 6px;}
+    .btn-portal-glass { font-size: 0.8rem;}
+    .corner-accent-top { display: none; }
+}
