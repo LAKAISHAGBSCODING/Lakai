@@ -5,6 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faqih Lakaisha Putra | Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Scroll mulus */
+        html { scroll-behavior: smooth; }
+
+        /* Styling dasar biar rapi */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 0 5%;
+            gap: 2rem;
+        }
+
+        .welcome-text {
+            color: var(--accent-magenta);
+            letter-spacing: 2px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .desc-text {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        /* 📱 MEDIA QUERY: PENGATURAN KHUSUS UNTUK HP (MOBILE) */
+        @media (max-width: 768px) {
+            .hero-section {
+                flex-direction: column; /* Susun ke bawah (Teks di atas, Gambar di bawah) */
+                text-align: center;
+                padding-top: 120px; /* Jarak aman dari navbar */
+                justify-content: center;
+            }
+            
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-title {
+                font-size: 2.5rem; /* Font dikecilin biar muat di HP */
+            }
+
+            .desc-text {
+                font-size: 1rem;
+            }
+
+            /* Bikin menu navigasi di HP bisa digeser / rapi */
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .navbar {
+                padding: 10px;
+            }
+        }
+
+        /* =======================================================
+           FLOATING MUSIC PLAYER (pojok kiri bawah)
+           ======================================================= */
+        .music-player {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-toggle-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #000;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .music-toggle-btn:hover {
+            border-color: var(--accent-magenta);
+            box-shadow: 0 10px 30px rgba(207, 90, 240, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Gambar album (thumbnail lagu) */
+        .album-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 50%;
+        }
+
+        /* Titik tengah piringan biar kesan vinyl record */
+        .vinyl-center-dot {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 13px; height: 13px;
+            background: #06020d;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Album art muter selama lagu main */
+        .music-toggle-btn.playing .album-art {
+            animation: spinDisc 4s linear infinite;
+        }
+
+        /* Cincin pulse pas lagu lagi main */
+        .pulse-ring {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 1px solid var(--accent-magenta);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .music-toggle-btn.playing .pulse-ring {
+            animation: pulseRing 1.8s ease-out infinite;
+        }
+
+        /* Indikator kecil "belum ada suara" sebelum user interaksi */
+        .mute-indicator {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 24px; height: 24px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            z-index: 3;
+        }
+
+        @keyframes spinDisc {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .music-player { bottom: 18px; left: 18px; }
+            .music-toggle-btn { width: 64px; height: 64px; }
+            .vinyl-center-dot { width: 10px; height: 10px; }
+            .mute-indicator { width: 20px; height: 20px; font-size: 11px; }
+        }
+    </style>
 </head>
 <body>
     <div id="intro-splash" class="splash-overlay-3d">
@@ -40,11 +222,12 @@
 
             <div class="compact-photo-3d">
                 <div class="photo-frame-compact">
-                    <img src="assets/gambar-faqih.jpeg" alt="Faqih Lakaisha">
-                    </div>
+                    <img src="assets/gambar-faqih.webp" alt="Faqih Lakaisha">
+                </div>
             </div>
         </div>
     </div>
+
     <div class="background-container">
         <div class="bg-blob blob-1"></div>
         <div class="bg-blob blob-2"></div>
@@ -55,25 +238,25 @@
         <nav class="nav-container">
             <div class="logo">Lakaisha<span class="text-gradient">.</span></div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="pages/skills.html">Skills</a></li>
-                <li><a href="pages/languages.html">Languages</a></li>
-                <li><a href="pages/achievements.html">Achievements</a></li>
-                <li><a href="pages/projects.html">Projects</a></li>
-                <li><a href="pages/experience.html">Experience</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="page-section hero-section">
+    <main id="home" class="page-section hero-section">
         <div class="hero-content fade-in">
-            <h2 style="color: var(--accent-magenta); letter-spacing: 2px; font-size: 1rem; margin-bottom: 1rem;">WELCOME TO MY SPACE</h2>
-            <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem;">Hi, I'm <br><span class="text-gradient">Faqih Lakaisha Putra</span></h1>
-            <p style="font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 500px;">
+            <h2 class="welcome-text">WELCOME TO MY SPACE</h2>
+            <h1 class="main-title">Hi, I'm <br><span class="text-gradient">Faqih Lakaisha Putra</span></h1>
+            <p class="desc-text">
                 Computer Science Student. Passionate about Web Development, Data Science, and creating logical solutions.
             </p>
             <div style="display: flex; gap: 1.5rem;">
-                <button onclick="window.location.href='pages/projects.html'" class="btn-primary">Explore Projects</button>
+                <button onclick="window.location.href='#projects'" class="btn-primary">Explore Projects</button>
             </div>
         </div>
         
@@ -81,34 +264,125 @@
             <div class="speech-bubble">
                 "in another life aku gamau masuk ilmu komputer"
             </div>
-            <div class="glass-sphere" style="background-image: url('assets/gambar-faqih.jpeg'); background-size: cover; background-position: center; border: 3px solid rgba(255, 255, 255, 0.4);">
+            <div class="glass-sphere" style="background-image: url('assets/gambar-faqih.webp'); background-size: cover; background-position: center; border: 3px solid rgba(255, 255, 255, 0.4);">
             </div>
         </div>
     </main>
 
+    <section id="skills" class="page-section"></section>
+    <section id="languages" class="page-section"></section>
+    <section id="achievements" class="page-section"></section>
+    <section id="projects" class="page-section"></section>
+    <section id="experience" class="page-section"></section>
+
+    <!-- =======================================================
+         FLOATING MUSIC PLAYER
+         ======================================================= -->
+    <div class="music-player">
+        <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Klik buat aktifin suara" type="button">
+            <img class="album-art" src="https://img.youtube.com/vi/OmKAn8rNbKg/hqdefault.jpg" alt="Album art">
+            <span class="vinyl-center-dot"></span>
+            <span class="pulse-ring"></span>
+            <span class="mute-indicator" id="muteIndicator">🔇</span>
+        </button>
+    </div>
+
+    <!-- Player YouTube disembunyikan, cuma buat audio -->
+    <div style="position:fixed; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;">
+        <div id="yt-player"></div>
+    </div>
+
     <script>
         const splash = document.getElementById('intro-splash');
-
-        // 1. Mengecek apakah user SUDAH melihat splash screen sebelumnya di sesi ini
         if (sessionStorage.getItem('splashSudahDilihat') === 'true') {
-            // Jika sudah, sembunyikan splash screen secara instan (tanpa animasi)
             splash.style.display = 'none';
         }
-
-        // 2. Fungsi saat tombol diklik
         function masukKePortfolio() {
-            // Simpan status ke browser bahwa user sudah melewati splash screen
             sessionStorage.setItem('splashSudahDilihat', 'true');
-            
-            // Jalankan animasi keluar
             splash.classList.add('exit-animation-3d');
-            
-            // Hapus dari layar sepenuhnya setelah animasi selesai
             setTimeout(() => {
                 splash.style.display = 'none';
             }, 800);
         }
     </script>
+
+    <!-- =======================================================
+         LOGIKA MUSIC PLAYER (YouTube IFrame API)
+         ======================================================= -->
+    <script>
+        const MUSIC_VIDEO_ID = 'OmKAn8rNbKg'; // Novo Amor - Anchor
+
+        let ytPlayer = null;
+        let audioUnmuted = false;
+        const musicBtn = document.getElementById('musicToggleBtn');
+        const muteIndicator = document.getElementById('muteIndicator');
+
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('yt-player', {
+                height: '1',
+                width: '1',
+                videoId: MUSIC_VIDEO_ID,
+                playerVars: {
+                    autoplay: 1,
+                    controls: 0,
+                    loop: 1,
+                    playlist: MUSIC_VIDEO_ID
+                },
+                events: {
+                    onReady: onPlayerReady,
+                    onStateChange: onPlayerStateChange
+                }
+            });
+        }
+
+        // Browser cuma ngizinin autoplay kalau di-mute dulu.
+        function onPlayerReady(event) {
+            event.target.mute();
+            event.target.playVideo();
+            musicBtn.classList.add('playing');
+        }
+
+        // Begitu user interaksi apa aja (klik/scroll/sentuh/keyboard),
+        // suara langsung dinyalain otomatis — berasa autoplay beneran.
+        function unmuteOnFirstInteraction() {
+            if (!audioUnmuted && ytPlayer && typeof ytPlayer.unMute === 'function') {
+                ytPlayer.unMute();
+                ytPlayer.setVolume(100);
+                audioUnmuted = true;
+                musicBtn.setAttribute('aria-label', 'Jeda musik');
+                if (muteIndicator) muteIndicator.style.display = 'none';
+            }
+            document.removeEventListener('click', unmuteOnFirstInteraction);
+            document.removeEventListener('touchstart', unmuteOnFirstInteraction);
+            document.removeEventListener('keydown', unmuteOnFirstInteraction);
+            document.removeEventListener('scroll', unmuteOnFirstInteraction);
+        }
+
+        document.addEventListener('click', unmuteOnFirstInteraction);
+        document.addEventListener('touchstart', unmuteOnFirstInteraction);
+        document.addEventListener('keydown', unmuteOnFirstInteraction);
+        document.addEventListener('scroll', unmuteOnFirstInteraction, { passive: true });
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                musicBtn.classList.add('playing');
+            } else {
+                musicBtn.classList.remove('playing');
+            }
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
+            const state = ytPlayer.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        });
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    
     <script src="js/main.js"></script>
 </body>
 </html>
