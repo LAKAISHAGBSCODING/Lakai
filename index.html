@@ -177,6 +177,36 @@
             .music-toggle-btn { width: 64px; height: 64px; }
             .vinyl-center-dot { width: 10px; height: 10px; }
             .mute-indicator { width: 20px; height: 20px; font-size: 11px; }
+            .tap-hint { left: 70px; font-size: 0.75rem; padding: 6px 12px; }
+        }
+
+        /* Hint kecil "tap buat suara" yang muncul di awal terus fade out */
+        .tap-hint {
+            position: absolute;
+            left: 92px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(6, 2, 13, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 30px;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            animation: hintPulse 2s ease-in-out infinite, hintFadeOut 0.5s ease 6s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.04); }
+        }
+
+        @keyframes hintFadeOut {
+            to { opacity: 0; visibility: hidden; }
         }
 
         /* =======================================================
@@ -368,10 +398,13 @@
             <span class="pulse-ring"></span>
             <span class="mute-indicator" id="muteIndicator">🔇</span>
         </button>
+        <span class="tap-hint" id="tapHint">Tap buat nyalain suara 🔊</span>
     </div>
 
-    <!-- Audio musik, disembunyikan (cuma buat suara) -->
-    <audio id="bgMusic" src="assets/musik.mp3" preload="auto" loop></audio>
+    <!-- Audio musik, disembunyikan (cuma buat suara).
+         Atribut autoplay+muted dipasang langsung di HTML sebagai
+         lapisan cadangan selain JS, biar makin reliable di semua browser. -->
+    <audio id="bgMusic" src="assets/musik.mp3" preload="auto" loop autoplay muted></audio>
 
     <script>
         const splash = document.getElementById('intro-splash');
@@ -414,6 +447,7 @@
         const bgMusic = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicToggleBtn');
         const muteIndicator = document.getElementById('muteIndicator');
+        const tapHint = document.getElementById('tapHint');
         let audioUnmuted = false;
 
         const START_TIME_SECONDS = 70; // mulai dari menit 1:10
@@ -458,6 +492,7 @@
                 if (bgMusic.paused) startAutoplay();
                 musicBtn.setAttribute('aria-label', 'Jeda musik');
                 if (muteIndicator) muteIndicator.style.display = 'none';
+                if (tapHint) tapHint.style.display = 'none';
             }
             document.removeEventListener('click', unmuteOnFirstInteraction);
             document.removeEventListener('touchstart', unmuteOnFirstInteraction);
