@@ -63,14 +63,6 @@
                 font-size: 1rem;
             }
 
-            /* Bikin menu navigasi di HP bisa digeser / rapi */
-            .nav-links {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            
             .navbar {
                 padding: 10px;
             }
@@ -186,6 +178,90 @@
             .vinyl-center-dot { width: 10px; height: 10px; }
             .mute-indicator { width: 20px; height: 20px; font-size: 11px; }
         }
+
+        /* =======================================================
+           HAMBURGER MENU (biar nav-links tetep bisa diakses di HP)
+           ======================================================= */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0;
+        }
+
+        .nav-toggle span {
+            display: block;
+            height: 2.5px;
+            width: 100%;
+            background: var(--text-main);
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+        .nav-toggle.open span:nth-child(2) { opacity: 0; }
+        .nav-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: flex; }
+
+            /* Override .nav-links { display:none } dari style.css */
+            .nav-links {
+                display: flex !important;
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                margin-top: 12px;
+                background: linear-gradient(180deg, rgba(6, 2, 13, 0.82), rgba(25, 10, 45, 0.72));
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                border: 1px solid var(--glass-border);
+                border-top: 1px solid var(--glass-highlight);
+                border-left: 1px solid var(--glass-highlight);
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.05);
+                overflow: hidden;
+                max-height: 0;
+                opacity: 0;
+                pointer-events: none;
+                transition: max-height 0.35s ease, opacity 0.25s ease;
+            }
+
+            .nav-links li a {
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+                font-weight: 600;
+            }
+
+            .nav-links.open {
+                max-height: 400px;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 14px;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .nav-links li:first-child a {
+                border-top: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -237,7 +313,14 @@
     <header class="navbar">
         <nav class="nav-container">
             <div class="logo">Lakaisha<span class="text-gradient">.</span></div>
-            <ul class="nav-links">
+
+            <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#languages">Languages</a></li>
@@ -280,17 +363,15 @@
          ======================================================= -->
     <div class="music-player">
         <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Klik buat aktifin suara" type="button">
-            <img class="album-art" src="https://img.youtube.com/vi/OmKAn8rNbKg/hqdefault.jpg" alt="Album art">
+            <img class="album-art" src="assets/fotomusik.webp" alt="Album art">
             <span class="vinyl-center-dot"></span>
             <span class="pulse-ring"></span>
             <span class="mute-indicator" id="muteIndicator">🔇</span>
         </button>
     </div>
 
-    <!-- Player YouTube disembunyikan, cuma buat audio -->
-    <div style="position:fixed; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;">
-        <div id="yt-player"></div>
-    </div>
+    <!-- Audio musik, disembunyikan (cuma buat suara) -->
+    <audio id="bgMusic" src="assets/musik.mp3" preload="auto" loop></audio>
 
     <script>
         const splash = document.getElementById('intro-splash');
@@ -304,51 +385,77 @@
                 splash.style.display = 'none';
             }, 800);
         }
+
+        // Hamburger menu (mobile)
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('open');
+                navToggle.classList.toggle('open', isOpen);
+                navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('open');
+                    navToggle.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
     </script>
 
     <!-- =======================================================
-         LOGIKA MUSIC PLAYER (YouTube IFrame API)
+         LOGIKA MUSIC PLAYER (HTML5 audio lokal)
          ======================================================= -->
     <script>
-        const MUSIC_VIDEO_ID = 'OmKAn8rNbKg'; // Novo Amor - Anchor
-
-        let ytPlayer = null;
-        let audioUnmuted = false;
+        const bgMusic = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicToggleBtn');
         const muteIndicator = document.getElementById('muteIndicator');
+        let audioUnmuted = false;
 
-        function onYouTubeIframeAPIReady() {
-            ytPlayer = new YT.Player('yt-player', {
-                height: '1',
-                width: '1',
-                videoId: MUSIC_VIDEO_ID,
-                playerVars: {
-                    autoplay: 1,
-                    controls: 0,
-                    loop: 1,
-                    playlist: MUSIC_VIDEO_ID
-                },
-                events: {
-                    onReady: onPlayerReady,
-                    onStateChange: onPlayerStateChange
-                }
-            });
-        }
+        const START_TIME_SECONDS = 70; // mulai dari menit 1:10
 
         // Browser cuma ngizinin autoplay kalau di-mute dulu.
-        function onPlayerReady(event) {
-            event.target.mute();
-            event.target.playVideo();
-            musicBtn.classList.add('playing');
+        bgMusic.muted = true;
+        bgMusic.volume = 1;
+
+        function startAutoplay() {
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Autoplay ke-block total (browser tertentu), musik akan
+                    // mulai begitu user klik ikonnya secara manual.
+                });
+            }
+        }
+
+        // Set posisi awal ke 1:10 begitu durasi lagu udah kebaca,
+        // baru abis itu mulai autoplay.
+        function setStartTimeAndPlay() {
+            try {
+                bgMusic.currentTime = START_TIME_SECONDS;
+            } catch (e) {
+                // Kalau gagal (browser lagi belum siap), abaikan, tetap coba play dari awal
+            }
+            startAutoplay();
+        }
+
+        if (bgMusic.readyState >= 1) {
+            setStartTimeAndPlay();
+        } else {
+            bgMusic.addEventListener('loadedmetadata', setStartTimeAndPlay, { once: true });
         }
 
         // Begitu user interaksi apa aja (klik/scroll/sentuh/keyboard),
         // suara langsung dinyalain otomatis — berasa autoplay beneran.
         function unmuteOnFirstInteraction() {
-            if (!audioUnmuted && ytPlayer && typeof ytPlayer.unMute === 'function') {
-                ytPlayer.unMute();
-                ytPlayer.setVolume(100);
+            if (!audioUnmuted) {
+                bgMusic.muted = false;
                 audioUnmuted = true;
+                if (bgMusic.paused) startAutoplay();
                 musicBtn.setAttribute('aria-label', 'Jeda musik');
                 if (muteIndicator) muteIndicator.style.display = 'none';
             }
@@ -363,26 +470,20 @@
         document.addEventListener('keydown', unmuteOnFirstInteraction);
         document.addEventListener('scroll', unmuteOnFirstInteraction, { passive: true });
 
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.PLAYING) {
-                musicBtn.classList.add('playing');
-            } else {
-                musicBtn.classList.remove('playing');
-            }
-        }
+        // Ikon muter cuma pas musik beneran lagi main
+        bgMusic.addEventListener('play', () => musicBtn.classList.add('playing'));
+        bgMusic.addEventListener('pause', () => musicBtn.classList.remove('playing'));
 
+        // Klik ikon = toggle play/pause manual
         musicBtn.addEventListener('click', () => {
-            if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
-            const state = ytPlayer.getPlayerState();
-            if (state === YT.PlayerState.PLAYING) {
-                ytPlayer.pauseVideo();
+            if (bgMusic.paused) {
+                bgMusic.play();
             } else {
-                ytPlayer.playVideo();
+                bgMusic.pause();
             }
         });
     </script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    
+
     <script src="js/main.js"></script>
 </body>
 </html>
