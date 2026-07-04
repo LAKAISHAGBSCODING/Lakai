@@ -5,6 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Portfolio</title>
     <link rel="stylesheet" href="../css/style.css">
+
+    <!-- =======================================================
+         STYLE KHUSUS HALAMAN INI SAJA (scoped, tidak menyentuh
+         style.css supaya halaman lain tidak ikut berubah).
+         Fungsinya: bikin link "Visit Website →" jadi tombol
+         yang lebih bagus & tetap responsif di HP.
+         ======================================================= -->
+    <style>
+        .view-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 0.4rem;
+            padding: 10px 22px;
+            width: fit-content;
+            background: rgba(207, 90, 240, 0.1);
+            border: 1px solid var(--accent-magenta);
+            border-radius: 30px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .view-link:hover {
+            background: var(--accent-magenta);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(207, 90, 240, 0.45);
+        }
+
+        .view-link:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        /* Panah pisah dari teks biar bisa dikasih animasi geser pas hover */
+        .view-link .arrow {
+            transition: transform 0.35s ease;
+        }
+        .view-link:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+            .view-link {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 22px;
+            }
+        }
+    </style>
 </head>
 <body>
     
@@ -58,7 +111,9 @@
                         </div>
                         <p>Just a basic static CV website I made using HTML when I first started learning.</p>
                         <div class="project-tags-row">#HTML #StaticSite #Learning</div>
-                        <a href="https://lakaishagbscoding.github.io/ResumeSaya/" target="_blank" class="view-link">Visit Website →</a>
+                        <a href="https://lakaishagbscoding.github.io/ResumeSaya/" target="_blank" class="view-link">Visit Website <span class="arrow"></span></a>
+
+                        </span></a>
                     </div>
                 </div>
             </div>
@@ -75,7 +130,7 @@
                         </div>
                         <p>This was a task for my Web Programming class at Unila. Used HTML and CSS to follow the assignment's layout.</p>
                         <div class="project-tags-row">#UniversityTask #HTML #CSS #Unila</div>
-                        <a href="https://lakaishagbscoding.github.io/tugas1_2417051037/" target="_blank" class="view-link">Visit Website →</a>
+                        <a href="https://lakaishagbscoding.github.io/tugas1_2417051037/" target="_blank" class="view-link">Visit Website <span class="arrow"></span></a>
                     </div>
                 </div>
             </div>

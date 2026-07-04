@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Portfolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="background-container">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <header class="navbar">
+        <nav class="nav-container">
+            <div class="logo">Lakaisha Builds<span class="text-gradient">.</span></div>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="languages.html">Languages</a></li>
+                <li><a href="projects.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-section" style="padding-top: 120px;">
+
+        <!-- ======================================================
+             1. HERO: teks kiri, foto kanan
+             GANTI: nama, isi paragraf, dan src foto sesuai punya kamu
+             ====================================================== -->
+        <section class="about-hero fade-in">
+            <div class="about-hero-text">
+                <h1 class="main-title text-gradient">Nama Kamu Di Sini</h1>
+
+                <p>
+                    Hi, you can call me <strong>Nama</strong> or <strong>Nickname</strong>.
+                    Tulis di sini cerita singkat tentang kamu — kuliah/kerja di mana,
+                    jurusan/bidang apa, dan asal kamu dari mana.
+                </p>
+
+                <p>
+                    Ceritain juga minat & fokus kamu, misalnya bidang yang kamu suka
+                    pelajari atau kembangkan, dan rencana ke depan mau diapain skill itu.
+                </p>
+
+                <p>
+                    Kalau aktif di sosial media, bisa disebut juga di sini
+                    (jumlah followers, platform yang dipakai, konten apa yang biasa dibuat).
+                </p>
+
+                <p>
+                    Ceritain hal-hal santai juga — hobi, artist/band favorit, hal yang
+                    kamu suka. Cek juga <a href="#" target="_blank" class="link-highlight">Spotify</a>
+                    aku kalau penasaran sama playlist-nya.
+                </p>
+
+                <p>Email me for any inquiries at <strong>emailkamu@domain.com</strong></p>
+            </div>
+
+            <div class="about-hero-photo">
+                <div class="about-photo-frame">
+                    <!-- GANTI src ini dengan foto kamu -->
+                    <img src="../assets/foto-about.webp" alt="Foto profil" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================
+             2. FAVORITE SONGS
+             Cover album diambil LIVE dari Spotify oEmbed (tanpa API key).
+             Warna tiap kartu otomatis ngikutin warna dominan cover-nya.
+             Data yang perlu kamu edit ada di <script> paling bawah,
+             di dalam array `songsData`. Tinggal ganti id + title + artist
+             + path file preview mp3 (kalau ada).
+             ====================================================== -->
+        <section class="about-section fade-in">
+            <h2 class="subsection-title"><span class="title-dash"></span>My Favorite Songs</h2>
+
+            <div class="song-grid" id="songGrid">
+                <!-- Kartu lagu di-generate otomatis lewat JS -->
+            </div>
+        </section>
+
+        <!-- ======================================================
+             3. READING LIST
+             Cover buku diambil LIVE dari Open Library Covers API
+             (tanpa API key, tanpa upload gambar sendiri).
+             Data yang perlu kamu edit ada di array `booksData`
+             di <script> paling bawah.
+             ====================================================== -->
+        <section class="about-section fade-in">
+            <h2 class="subsection-title"><span class="title-dash"></span>Reading List</h2>
+
+            <div class="book-grid" id="bookGrid">
+                <!-- Kartu buku di-generate otomatis lewat JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <div class="music-player">
+        <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Klik buat aktifin suara" type="button">
+            <img class="album-art" src="../assets/fotomusik.webp" alt="Album art">
+            <span class="vinyl-center-dot"></span>
+            <span class="pulse-ring"></span>
+            <span class="mute-indicator" id="muteIndicator">🔇</span>
+        </button>
+        <span class="tap-hint" id="tapHint"></span>
+    </div>
+
+    <audio id="bgMusic" src="../assets/musik.mp3" preload="auto" loop autoplay muted></audio>
+
+    <script src="../js/main.js"></script>
+
+    <script>
+        // Logika Hamburger Menu
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('open');
+                navToggle.classList.toggle('open', isOpen);
+                navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('open');
+                    navToggle.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+    </script>
+
+    <!-- ======================================================
+         SONGS + BOOKS: ambil cover dari API secara live
+         ====================================================== -->
+    <script>
+        // ---------- DATA: EDIT DI SINI AJA ----------
+        const songsData = [
+            { id: '7qH9Z4dJEN0l9bidizW7fq', title: 'Anchor',                   artist: 'Novo Amor',      preview: '../assets/songs/anchor-preview.mp3' },
+            { id: '3oZDeae10q842sijf5qe4V', title: 'Anti-Hero',                artist: 'Taylor Swift',   preview: '../assets/songs/anti-hero-preview.mp3' },
+            { id: '1aUTJpaxVd8LpUfbb19wZH', title: 'Yellow',                   artist: 'Coldplay',       preview: '../assets/songs/yellow-preview.mp3' },
+            { id: '10nyNJ6zNy2YVYLrcwLccB', title: 'No Surprises',             artist: 'Radiohead',      preview: '../assets/songs/no-surprises-preview.mp3' },
+            { id: '2xnaRolnwpF5VIxJogzMkb', title: '18',                       artist: 'One Direction',  preview: '../assets/songs/18-preview.mp3' },
+            { id: '1j11UpUPMszy3aQnW1rZpE', title: 'No Smile Zone',            artist: 'Ericko Lim',     preview: '../assets/songs/no-smile-zone-preview.mp3' },
+            { id: '3oEkrIfXfSh9zGnE7eBzSV', title: 'The Winner Takes It All',  artist: 'ABBA',           preview: '../assets/songs/winner-takes-it-all-preview.mp3' }
+        ];
+
+        const booksData = [
+            // searchTitle/searchAuthor dipakai KHUSUS buat nyari cover di Open Library
+            // (kadang judul terjemahan Indonesia nggak ke-index, jadi cari pakai judul asli)
+            { title: 'Bersikap Bodo Amat',        author: 'Mark Manson',   searchTitle: 'The Subtle Art of Not Giving a Fuck', searchAuthor: 'Mark Manson' },
+            { title: 'The Psychology of Money',   author: 'Morgan Housel' },
+            { title: 'Atomic Habits',             author: 'James Clear' }
+        ];
+
+        const FALLBACK_CARD_COLORS = ['#4a4a4a', '#7c2d3a', '#2d4a7c', '#5c4a7c', '#3a5c2d', '#7c5c2d', '#2d5c5c'];
+
+        function svgSpotifyIcon() {
+            return `<svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24 0-.373-.06-.6-.196-1.635-1-3.68-1.226-6.117-.706-.365.075-.685.25-.9-.13-.146-.317-.135-.606.226-.815 2.735-.612 5.111-.375 6.977.75.319.196.319.663.02.897zm1.281-2.85c-.297.336-.746.354-1.081.058-1.859-1.144-4.585-1.596-7.5-.878-.376.088-.746-.152-.834-.528-.088-.376.152-.746.528-.834 3.288-.87 6.328-.348 8.475 1.03.335.235.353.653.412 1.152zm.128-2.988C15.72 9.42 8.36 9.18 5.914 9.96c-.44.14-.906-.108-1.045-.548-.14-.44.108-.906.548-1.045 2.8-.9 10.75-.62 15.03 1.9.4.24.53.756.29 1.157-.24.4-.755.53-1.156.29z"/></svg>`;
+        }
+
+        // Ambil rata-rata warna dari gambar (buat background kartu lagu)
+        function averageColorFromImage(imgEl) {
+            try {
+                const c = document.createElement('canvas');
+                c.width = 16; c.height = 16;
+                const ctx = c.getContext('2d');
+                ctx.drawImage(imgEl, 0, 0, 16, 16);
+                const data = ctx.getImageData(0, 0, 16, 16).data;
+                let r = 0, g = 0, b = 0, n = 0;
+                for (let i = 0; i < data.length; i += 4) {
+                    r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
+                }
+                // dikaliin 0.55 biar agak gelap -> teks putih tetap kebaca
+                r = Math.round((r / n) * 0.55);
+                g = Math.round((g / n) * 0.55);
+                b = Math.round((b / n) * 0.55);
+                return `rgb(${r}, ${g}, ${b})`;
+            } catch (e) {
+                // kena CORS taint, pakai fallback warna manual
+                return null;
+            }
+        }
+
+        async function buildSongCard(song, index) {
+            const card = document.createElement('div');
+            card.className = 'song-card';
+            card.style.background = FALLBACK_CARD_COLORS[index % FALLBACK_CARD_COLORS.length];
+
+            card.innerHTML = `
+                <div class="song-cover loading">
+                    <img alt="${song.title} cover" loading="lazy" crossorigin="anonymous">
+                </div>
+                <div class="song-info">
+                    <h4>${song.title}</h4>
+                    <p>${song.artist}</p>
+                    <span class="song-preview-badge">Preview</span>
+                </div>
+                <div class="song-actions">
+                    <a href="https://open.spotify.com/track/${song.id}" target="_blank" rel="noopener" class="song-spotify-icon" aria-label="Buka di Spotify">${svgSpotifyIcon()}</a>
+                    <button class="song-add-btn" aria-label="Tambah ke koleksi" type="button">+</button>
+                    <button class="song-more-btn" aria-label="Lainnya" type="button">&#8942;</button>
+                    <button class="song-play-btn" aria-label="Play preview" type="button">
+                        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                    </button>
+                    <audio class="song-audio" src="${song.preview}" preload="none"></audio>
+                </div>
+            `;
+
+            document.getElementById('songGrid').appendChild(card);
+
+            // Ambil cover asli dari Spotify lewat oEmbed (publik, tanpa API key)
+            try {
+                const res = await fetch(`https://open.spotify.com/oembed?url=https://open.spotify.com/track/${song.id}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const imgEl = card.querySelector('.song-cover img');
+                    imgEl.onload = () => {
+                        card.querySelector('.song-cover').classList.remove('loading');
+                        const color = averageColorFromImage(imgEl);
+                        if (color) card.style.background = color;
+                    };
+                    imgEl.onerror = () => card.querySelector('.song-cover').classList.remove('loading');
+                    imgEl.src = data.thumbnail_url;
+                } else {
+                    card.querySelector('.song-cover').classList.remove('loading');
+                }
+            } catch (e) {
+                card.querySelector('.song-cover').classList.remove('loading');
+            }
+
+            // Play / pause preview mp3 lokal
+            const btn = card.querySelector('.song-play-btn');
+            const audio = card.querySelector('.song-audio');
+            btn.addEventListener('click', () => {
+                const isPlaying = !audio.paused;
+                document.querySelectorAll('.song-audio').forEach(a => { if (a !== audio) a.pause(); });
+                document.querySelectorAll('.song-play-btn').forEach(b => { if (b !== btn) b.classList.remove('playing'); });
+                if (isPlaying) {
+                    audio.pause();
+                    btn.classList.remove('playing');
+                } else {
+                    audio.play().catch(() => {});
+                    btn.classList.add('playing');
+                }
+            });
+            audio.addEventListener('ended', () => btn.classList.remove('playing'));
+
+            // Tombol "+" cuma efek visual (nggak nyambung ke akun Spotify beneran)
+            card.querySelector('.song-add-btn').addEventListener('click', function () {
+                this.classList.toggle('added');
+                this.textContent = this.classList.contains('added') ? '✓' : '+';
+            });
+        }
+
+        async function buildBookCard(book) {
+            const card = document.createElement('div');
+            card.className = 'book-card';
+            card.innerHTML = `
+                <div class="book-cover loading"><img alt="${book.title}" loading="lazy"></div>
+                <div class="book-title">${book.title}</div>
+                <div class="book-author">${book.author}</div>
+            `;
+            document.getElementById('bookGrid').appendChild(card);
+
+            try {
+                const q = encodeURIComponent(book.searchTitle || book.title);
+                const a = encodeURIComponent(book.searchAuthor || book.author);
+                const res = await fetch(`https://openlibrary.org/search.json?title=${q}&author=${a}&limit=1`);
+                const data = await res.json();
+                const doc = data.docs && data.docs[0];
+                const imgEl = card.querySelector('.book-cover img');
+
+                if (doc && doc.cover_i) {
+                    imgEl.onload = () => card.querySelector('.book-cover').classList.remove('loading');
+                    imgEl.onerror = () => card.querySelector('.book-cover').classList.remove('loading');
+                    imgEl.src = `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`;
+                } else {
+                    card.querySelector('.book-cover').classList.remove('loading');
+                }
+            } catch (e) {
+                card.querySelector('.book-cover').classList.remove('loading');
+            }
+        }
+
+        songsData.forEach((s, i) => buildSongCard(s, i));
+        booksData.forEach(b => buildBookCard(b));
+    </script>
+
+    <!-- =======================================================
+         MUSIK GLOBAL (persist antar halaman via localStorage)
+         Blok ini SAMA PERSIS di semua halaman (index, skills,
+         languages, projects, about, dll) supaya posisi lagu & status
+         mute/unmute nyambung terus walau pindah halaman.
+         ======================================================= -->
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggleBtn');
+        const muteIndicator = document.getElementById('muteIndicator');
+        const tapHint = document.getElementById('tapHint');
+
+        const START_TIME_SECONDS = 70; // start default (kunjungan pertama) dari menit 1:10
+        const LS_TIME_KEY = 'lb_music_time';
+        const LS_UNMUTED_KEY = 'lb_music_unmuted';
+
+        let audioUnmuted = false;
+
+        bgMusic.muted = true;
+        bgMusic.volume = 1;
+
+        function startAutoplay() {
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Autoplay ke-block total, musik akan mulai begitu
+                    // user klik ikonnya secara manual.
+                });
+            }
+        }
+
+        function goUnmuted() {
+            bgMusic.muted = false;
+            audioUnmuted = true;
+            localStorage.setItem(LS_UNMUTED_KEY, '1');
+            if (bgMusic.paused) startAutoplay();
+            musicBtn.setAttribute('aria-label', 'Jeda musik');
+            if (muteIndicator) muteIndicator.style.display = 'none';
+            if (tapHint) tapHint.style.display = 'none';
+        }
+
+        function setStartTimeAndPlay() {
+            const savedTime = parseFloat(localStorage.getItem(LS_TIME_KEY));
+            try {
+                bgMusic.currentTime = !isNaN(savedTime) && savedTime > 0 ? savedTime : START_TIME_SECONDS;
+            } catch (e) {
+                // kalau gagal (browser belum siap), abaikan
+            }
+            startAutoplay();
+
+            // Kalau di halaman sebelumnya user udah pernah nyalain suara,
+            // langsung coba unmute otomatis di halaman ini juga.
+            if (localStorage.getItem(LS_UNMUTED_KEY) === '1') {
+                goUnmuted();
+            }
+        }
+
+        if (bgMusic.readyState >= 1) {
+            setStartTimeAndPlay();
+        } else {
+            bgMusic.addEventListener('loadedmetadata', setStartTimeAndPlay, { once: true });
+        }
+
+        function unmuteOnFirstInteraction() {
+            if (!audioUnmuted) {
+                goUnmuted();
+            }
+            document.removeEventListener('click', unmuteOnFirstInteraction);
+            document.removeEventListener('touchstart', unmuteOnFirstInteraction);
+            document.removeEventListener('keydown', unmuteOnFirstInteraction);
+            document.removeEventListener('scroll', unmuteOnFirstInteraction);
+        }
+
+        document.addEventListener('click', unmuteOnFirstInteraction);
+        document.addEventListener('touchstart', unmuteOnFirstInteraction);
+        document.addEventListener('keydown', unmuteOnFirstInteraction);
+        document.addEventListener('scroll', unmuteOnFirstInteraction, { passive: true });
+
+        // Ikon muter cuma pas musik beneran lagi main
+        bgMusic.addEventListener('play', () => musicBtn.classList.add('playing'));
+        bgMusic.addEventListener('pause', () => musicBtn.classList.remove('playing'));
+
+        // Klik ikon = toggle play/pause manual
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+            } else {
+                bgMusic.pause();
+            }
+        });
+
+        // Simpan posisi lagu secara berkala + pas mau pindah halaman
+        let lastSaved = 0;
+        bgMusic.addEventListener('timeupdate', () => {
+            const now = Date.now();
+            if (now - lastSaved > 1500) {
+                lastSaved = now;
+                localStorage.setItem(LS_TIME_KEY, String(bgMusic.currentTime));
+            }
+        });
+        window.addEventListener('pagehide', () => {
+            localStorage.setItem(LS_TIME_KEY, String(bgMusic.currentTime));
+        });
+    </script>
+</body>
+</html>
