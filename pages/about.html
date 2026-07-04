@@ -37,53 +37,40 @@
     <main class="page-section" style="padding-top: 120px;">
 
         <!-- ======================================================
-             1. HERO: teks kiri, foto kanan
-             GANTI: nama, isi paragraf, dan src foto sesuai punya kamu
+             1. HERO
              ====================================================== -->
         <section class="about-hero fade-in">
             <div class="about-hero-text">
-                <h1 class="main-title text-gradient">Nama Kamu Di Sini</h1>
+                <h1 class="main-title text-gradient">Faqih Lakaisha Putra</h1>
 
                 <p>
-                    Hi, you can call me <strong>Nama</strong> or <strong>Nickname</strong>.
-                    Tulis di sini cerita singkat tentang kamu — kuliah/kerja di mana,
-                    jurusan/bidang apa, dan asal kamu dari mana.
+                    Hi, you can call me <strong>Lakaisha</strong>. Aku adalah seorang anak desa yang punya banyak impian besar. Saat ini, aku sangat antusias menjalani hari-hariku dengan belajar hal-hal baru dan mengeksplorasi dunia di sekitarku.
                 </p>
 
                 <p>
-                    Ceritain juga minat & fokus kamu, misalnya bidang yang kamu suka
-                    pelajari atau kembangkan, dan rencana ke depan mau diapain skill itu.
+                    Aku punya ketertarikan khusus di dunia pemrograman. Walaupun merasa belum jago, aku selalu semangat buat terus belajar, ngulik, dan mengembangkan diri di bidang ini. Salah satu impian terbesarku adalah bisa keliling dunia dan mengunjungi berbagai tempat baru yang luar biasa.
                 </p>
 
                 <p>
-                    Kalau aktif di sosial media, bisa disebut juga di sini
-                    (jumlah followers, platform yang dipakai, konten apa yang biasa dibuat).
+                    Aku juga suka banget berbagi cerita dan menjalin koneksi baru. Kalau kalian mau ngobrol atau sekadar <em>say hi</em>, kalian bisa temuin dan <em>follow</em> Instagram-ku di <a href="https://instagram.com/faqihlakaisha_" target="_blank" class="link-highlight">@faqihlakaisha_</a>.
                 </p>
 
                 <p>
-                    Ceritain hal-hal santai juga — hobi, artist/band favorit, hal yang
-                    kamu suka. Cek juga <a href="#" target="_blank" class="link-highlight">Spotify</a>
-                    aku kalau penasaran sama playlist-nya.
+                    Di waktu santai, aku paling suka mengisi waktu dengan main rubik dan membaca buku. Buatku, selalu ada keseruan dan wawasan menarik dari setiap buku yang kita baca atau cerita yang kita bagikan.
                 </p>
 
-                <p>Email me for any inquiries at <strong>emailkamu@domain.com</strong></p>
+                <p>Email me for any inquiries or just to say hi at <strong>faqihlakaishaputra36@gmail.com</strong></p>
             </div>
 
             <div class="about-hero-photo">
                 <div class="about-photo-frame">
-                    <!-- GANTI src ini dengan foto kamu -->
-                    <img src="../assets/foto-about.webp" alt="Foto profil" loading="lazy" decoding="async">
+                    <img src="../assets/gambar-faqih.webp" alt="Foto profil" loading="lazy" decoding="async">
                 </div>
             </div>
         </section>
 
         <!-- ======================================================
-             2. FAVORITE SONGS
-             Cover album diambil LIVE dari Spotify oEmbed (tanpa API key).
-             Warna tiap kartu otomatis ngikutin warna dominan cover-nya.
-             Data yang perlu kamu edit ada di <script> paling bawah,
-             di dalam array `songsData`. Tinggal ganti id + title + artist
-             + path file preview mp3 (kalau ada).
+             2. FAVORITE SONGS (Spotify API)
              ====================================================== -->
         <section class="about-section fade-in">
             <h2 class="subsection-title"><span class="title-dash"></span>My Favorite Songs</h2>
@@ -94,11 +81,7 @@
         </section>
 
         <!-- ======================================================
-             3. READING LIST
-             Cover buku diambil LIVE dari Open Library Covers API
-             (tanpa API key, tanpa upload gambar sendiri).
-             Data yang perlu kamu edit ada di array `booksData`
-             di <script> paling bawah.
+             3. READING LIST (Manual Href Internet)
              ====================================================== -->
         <section class="about-section fade-in">
             <h2 class="subsection-title"><span class="title-dash"></span>Reading List</h2>
@@ -124,8 +107,13 @@
 
     <script src="../js/main.js"></script>
 
+    <!-- Spotify Embed IFrame API resmi -->
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
     <script>
-        // Logika Hamburger Menu
+        // ======================================================
+        // LOGIKA HAMBURGER MENU
+        // ======================================================
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -146,11 +134,11 @@
         }
     </script>
 
-    <!-- ======================================================
-         SONGS + BOOKS: ambil cover dari API secara live
-         ====================================================== -->
     <script>
-        // ---------- DATA: EDIT DI SINI AJA ----------
+        // ======================================================
+        // DATA LAGU (SPOTIFY API) & BUKU (MANUAL HREF)
+        // ======================================================
+        
         const songsData = [
             { id: '7qH9Z4dJEN0l9bidizW7fq', title: 'Anchor',                   artist: 'Novo Amor',      preview: '../assets/songs/anchor-preview.mp3' },
             { id: '3oZDeae10q842sijf5qe4V', title: 'Anti-Hero',                artist: 'Taylor Swift',   preview: '../assets/songs/anti-hero-preview.mp3' },
@@ -161,21 +149,22 @@
             { id: '3oEkrIfXfSh9zGnE7eBzSV', title: 'The Winner Takes It All',  artist: 'ABBA',           preview: '../assets/songs/winner-takes-it-all-preview.mp3' }
         ];
 
+        // TINGGAL GANTI LINK DI BAGIAN "cover" DENGAN LINK GAMBAR DARI INTERNET
         const booksData = [
-            // searchTitle/searchAuthor dipakai KHUSUS buat nyari cover di Open Library
-            // (kadang judul terjemahan Indonesia nggak ke-index, jadi cari pakai judul asli)
-            { title: 'Bersikap Bodo Amat',        author: 'Mark Manson',   searchTitle: 'The Subtle Art of Not Giving a Fuck', searchAuthor: 'Mark Manson' },
-            { title: 'The Psychology of Money',   author: 'Morgan Housel' },
-            { title: 'Atomic Habits',             author: 'James Clear' }
+            { title: 'Bersikap Bodo Amat',  author: 'Mark Manson',   cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXg8MwS8GlX5wuylgOIjjI4d5t61l_VqJ-G9hlJu4eVg&s=10' },
+            { title: 'The Psychology of Money',  author: 'Morgan Housel', cover: 'data:image/jpeg;base64,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' },
+            { title: 'Atomic Habits',            author: 'James Clear',   cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5UJl0fhYe_XQbDaXQeUPFiY_0ySDKjLRXuBxXoNMVfA&s=10' } 
         ];
 
         const FALLBACK_CARD_COLORS = ['#4a4a4a', '#7c2d3a', '#2d4a7c', '#5c4a7c', '#3a5c2d', '#7c5c2d', '#2d5c5c'];
 
+        // ======================================================
+        // LOGIKA KARTU LAGU (SPOTIFY)
+        // ======================================================
         function svgSpotifyIcon() {
             return `<svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24 0-.373-.06-.6-.196-1.635-1-3.68-1.226-6.117-.706-.365.075-.685.25-.9-.13-.146-.317-.135-.606.226-.815 2.735-.612 5.111-.375 6.977.75.319.196.319.663.02.897zm1.281-2.85c-.297.336-.746.354-1.081.058-1.859-1.144-4.585-1.596-7.5-.878-.376.088-.746-.152-.834-.528-.088-.376.152-.746.528-.834 3.288-.87 6.328-.348 8.475 1.03.335.235.353.653.412 1.152zm.128-2.988C15.72 9.42 8.36 9.18 5.914 9.96c-.44.14-.906-.108-1.045-.548-.14-.44.108-.906.548-1.045 2.8-.9 10.75-.62 15.03 1.9.4.24.53.756.29 1.157-.24.4-.755.53-1.156.29z"/></svg>`;
         }
 
-        // Ambil rata-rata warna dari gambar (buat background kartu lagu)
         function averageColorFromImage(imgEl) {
             try {
                 const c = document.createElement('canvas');
@@ -187,15 +176,37 @@
                 for (let i = 0; i < data.length; i += 4) {
                     r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
                 }
-                // dikaliin 0.55 biar agak gelap -> teks putih tetap kebaca
                 r = Math.round((r / n) * 0.55);
                 g = Math.round((g / n) * 0.55);
                 b = Math.round((b / n) * 0.55);
                 return `rgb(${r}, ${g}, ${b})`;
             } catch (e) {
-                // kena CORS taint, pakai fallback warna manual
                 return null;
             }
+        }
+
+        const spotifyControllers = {};
+        const apiReadyPromise = new Promise((resolve) => {
+            window.onSpotifyIframeApiReady = (IFrameAPI) => resolve(IFrameAPI);
+        });
+
+        async function setupSpotifyController(song, card) {
+            const IFrameAPI = await apiReadyPromise;
+            const holder = card.querySelector('.song-embed-holder');
+            IFrameAPI.createController(holder, {
+                uri: `spotify:track:${song.id}`,
+                width: '1',
+                height: '1'
+            }, (EmbedController) => {
+                spotifyControllers[song.id] = EmbedController;
+                const btn = card.querySelector('.song-play-btn');
+                btn.disabled = false;
+                btn.classList.remove('is-loading');
+
+                EmbedController.addListener('playback_update', (e) => {
+                    btn.classList.toggle('playing', !e.data.isPaused);
+                });
+            });
         }
 
         async function buildSongCard(song, index) {
@@ -215,18 +226,17 @@
                 <div class="song-actions">
                     <a href="https://open.spotify.com/track/${song.id}" target="_blank" rel="noopener" class="song-spotify-icon" aria-label="Buka di Spotify">${svgSpotifyIcon()}</a>
                     <button class="song-add-btn" aria-label="Tambah ke koleksi" type="button">+</button>
-                    <button class="song-more-btn" aria-label="Lainnya" type="button">&#8942;</button>
-                    <button class="song-play-btn" aria-label="Play preview" type="button">
+                    <button class="song-more-btn" aria-label="Lainnya" type="button">⋮</button>
+                    <button class="song-play-btn is-loading" aria-label="Play lagu" type="button" disabled>
                         <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
                     </button>
-                    <audio class="song-audio" src="${song.preview}" preload="none"></audio>
                 </div>
+                <div class="song-embed-holder"></div>
             `;
 
             document.getElementById('songGrid').appendChild(card);
 
-            // Ambil cover asli dari Spotify lewat oEmbed (publik, tanpa API key)
             try {
                 const res = await fetch(`https://open.spotify.com/oembed?url=https://open.spotify.com/track/${song.id}`);
                 if (res.ok) {
@@ -246,31 +256,28 @@
                 card.querySelector('.song-cover').classList.remove('loading');
             }
 
-            // Play / pause preview mp3 lokal
-            const btn = card.querySelector('.song-play-btn');
-            const audio = card.querySelector('.song-audio');
-            btn.addEventListener('click', () => {
-                const isPlaying = !audio.paused;
-                document.querySelectorAll('.song-audio').forEach(a => { if (a !== audio) a.pause(); });
-                document.querySelectorAll('.song-play-btn').forEach(b => { if (b !== btn) b.classList.remove('playing'); });
-                if (isPlaying) {
-                    audio.pause();
-                    btn.classList.remove('playing');
-                } else {
-                    audio.play().catch(() => {});
-                    btn.classList.add('playing');
-                }
-            });
-            audio.addEventListener('ended', () => btn.classList.remove('playing'));
+            setupSpotifyController(song, card);
 
-            // Tombol "+" cuma efek visual (nggak nyambung ke akun Spotify beneran)
+            const btn = card.querySelector('.song-play-btn');
+            btn.addEventListener('click', () => {
+                const controller = spotifyControllers[song.id];
+                if (!controller) return;
+                Object.entries(spotifyControllers).forEach(([id, ctrl]) => {
+                    if (id !== song.id) ctrl.pause();
+                });
+                controller.togglePlay();
+            });
+
             card.querySelector('.song-add-btn').addEventListener('click', function () {
                 this.classList.toggle('added');
                 this.textContent = this.classList.contains('added') ? '✓' : '+';
             });
         }
 
-        async function buildBookCard(book) {
+        // ======================================================
+        // LOGIKA KARTU BUKU (MANUAL HREF)
+        // ======================================================
+        function buildBookCard(book) {
             const card = document.createElement('div');
             card.className = 'book-card';
             card.innerHTML = `
@@ -280,43 +287,39 @@
             `;
             document.getElementById('bookGrid').appendChild(card);
 
-            try {
-                const q = encodeURIComponent(book.searchTitle || book.title);
-                const a = encodeURIComponent(book.searchAuthor || book.author);
-                const res = await fetch(`https://openlibrary.org/search.json?title=${q}&author=${a}&limit=1`);
-                const data = await res.json();
-                const doc = data.docs && data.docs[0];
-                const imgEl = card.querySelector('.book-cover img');
+            const coverBox = card.querySelector('.book-cover');
+            const imgEl = card.querySelector('.book-cover img');
 
-                if (doc && doc.cover_i) {
-                    imgEl.onload = () => card.querySelector('.book-cover').classList.remove('loading');
-                    imgEl.onerror = () => card.querySelector('.book-cover').classList.remove('loading');
-                    imgEl.src = `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`;
-                } else {
-                    card.querySelector('.book-cover').classList.remove('loading');
-                }
-            } catch (e) {
-                card.querySelector('.book-cover').classList.remove('loading');
+            if (book.cover) {
+                imgEl.onload = () => coverBox.classList.remove('loading');
+                imgEl.onerror = () => showBookFallback(coverBox, book.title);
+                imgEl.src = book.cover;
+            } else {
+                showBookFallback(coverBox, book.title);
             }
         }
 
+        function showBookFallback(coverBox, title) {
+            coverBox.classList.remove('loading');
+            coverBox.classList.add('book-cover-fallback');
+            coverBox.innerHTML = `<span>${title}</span>`;
+        }
+
+        // Render semua
         songsData.forEach((s, i) => buildSongCard(s, i));
         booksData.forEach(b => buildBookCard(b));
     </script>
 
-    <!-- =======================================================
-         MUSIK GLOBAL (persist antar halaman via localStorage)
-         Blok ini SAMA PERSIS di semua halaman (index, skills,
-         languages, projects, about, dll) supaya posisi lagu & status
-         mute/unmute nyambung terus walau pindah halaman.
-         ======================================================= -->
     <script>
+        // ======================================================
+        // MUSIK GLOBAL (PERSIST ANTAR HALAMAN)
+        // ======================================================
         const bgMusic = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicToggleBtn');
         const muteIndicator = document.getElementById('muteIndicator');
         const tapHint = document.getElementById('tapHint');
 
-        const START_TIME_SECONDS = 70; // start default (kunjungan pertama) dari menit 1:10
+        const START_TIME_SECONDS = 70; 
         const LS_TIME_KEY = 'lb_music_time';
         const LS_UNMUTED_KEY = 'lb_music_unmuted';
 
@@ -328,10 +331,7 @@
         function startAutoplay() {
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    // Autoplay ke-block total, musik akan mulai begitu
-                    // user klik ikonnya secara manual.
-                });
+                playPromise.catch(() => {});
             }
         }
 
@@ -349,13 +349,9 @@
             const savedTime = parseFloat(localStorage.getItem(LS_TIME_KEY));
             try {
                 bgMusic.currentTime = !isNaN(savedTime) && savedTime > 0 ? savedTime : START_TIME_SECONDS;
-            } catch (e) {
-                // kalau gagal (browser belum siap), abaikan
-            }
+            } catch (e) {}
             startAutoplay();
 
-            // Kalau di halaman sebelumnya user udah pernah nyalain suara,
-            // langsung coba unmute otomatis di halaman ini juga.
             if (localStorage.getItem(LS_UNMUTED_KEY) === '1') {
                 goUnmuted();
             }
@@ -382,11 +378,9 @@
         document.addEventListener('keydown', unmuteOnFirstInteraction);
         document.addEventListener('scroll', unmuteOnFirstInteraction, { passive: true });
 
-        // Ikon muter cuma pas musik beneran lagi main
         bgMusic.addEventListener('play', () => musicBtn.classList.add('playing'));
         bgMusic.addEventListener('pause', () => musicBtn.classList.remove('playing'));
 
-        // Klik ikon = toggle play/pause manual
         musicBtn.addEventListener('click', () => {
             if (bgMusic.paused) {
                 bgMusic.play();
@@ -395,7 +389,6 @@
             }
         });
 
-        // Simpan posisi lagu secara berkala + pas mau pindah halaman
         let lastSaved = 0;
         bgMusic.addEventListener('timeupdate', () => {
             const now = Date.now();
