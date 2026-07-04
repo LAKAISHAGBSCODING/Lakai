@@ -7,11 +7,36 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-   
+    
+    <!-- Background Animasi -->
+    <div class="background-container">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
 
-   
+    <!-- Navbar -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <div class="logo">Lakaisha Builds<span class="text-gradient">.</span></div>
 
-    <main class="page-section">
+            <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="languages.html" class="active">Languages</a></li>
+                <li><a href="projects.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-section" style="padding-top: 30px;">
         <h1 class="section-title text-gradient fade-in">Proficiency</h1>
         
         <div class="fade-in" style="margin-bottom: 4rem;">
@@ -19,7 +44,7 @@
             <div class="software-grid">
                 
                 <div class="glass-card skill-badge glow-hover">
-                    <svg class="skill-icon spoken-flag" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="skill-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                         <clipPath id="id-clip"><circle cx="32" cy="32" r="32"/></clipPath>
                         <g clip-path="url(#id-clip)">
                             <rect width="64" height="32" fill="#CE1126"/>
@@ -27,16 +52,19 @@
                         </g>
                     </svg>
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>Indonesian</span>
-                            <span class="skill-percent" data-target="95">0%</span>
+                        <span class="skill-name">Indonesian</span>
+                        <div class="skill-dots" aria-label="5 dari 5">
+                            <span class="dot on" style="--dot-color:#CE1126;"></span>
+                            <span class="dot on" style="--dot-color:#CE1126;"></span>
+                            <span class="dot on" style="--dot-color:#CE1126;"></span>
+                            <span class="dot on" style="--dot-color:#CE1126;"></span>
+                            <span class="dot on" style="--dot-color:#CE1126;"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 95%; background: #CE1126;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <svg class="skill-icon spoken-flag" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="skill-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                         <clipPath id="uk-clip"><circle cx="32" cy="32" r="32"/></clipPath>
                         <g clip-path="url(#uk-clip)">
                             <rect width="64" height="64" fill="#012169"/>
@@ -47,16 +75,19 @@
                         </g>
                     </svg>
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>English</span>
-                            <span class="skill-percent" data-target="60">0%</span>
+                        <span class="skill-name">English</span>
+                        <div class="skill-dots" aria-label="3 dari 5">
+                            <span class="dot on" style="--dot-color:#012169;"></span>
+                            <span class="dot on" style="--dot-color:#012169;"></span>
+                            <span class="dot on" style="--dot-color:#012169;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 60%; background: #012169;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <svg class="skill-icon spoken-flag" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="skill-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                         <clipPath id="de-clip"><circle cx="32" cy="32" r="32"/></clipPath>
                         <g clip-path="url(#de-clip)">
                             <rect width="64" height="21.33" fill="#000000"/>
@@ -65,12 +96,13 @@
                         </g>
                     </svg>
                     <div class="badge-info">
-                        <div class="badge-info">
-                            <div class="badge-text-row">
-                                <span>German</span>
-                                <span class="skill-percent" data-target="35">0%</span>
-                            </div>
-                            <div class="mini-progress"><div class="mini-progress-fill" style="width: 35%; background: #FFCE00;"></div></div>
+                        <span class="skill-name">German</span>
+                        <div class="skill-dots" aria-label="2 dari 5">
+                            <span class="dot on" style="--dot-color:#FFCE00;"></span>
+                            <span class="dot on" style="--dot-color:#FFCE00;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
                     </div>
                 </div>
@@ -83,104 +115,131 @@
             <div class="software-grid">
                 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>HTML5</span>
-                            <span class="skill-percent" data-target="60">0%</span>
+                        <span class="skill-name">HTML5</span>
+                        <div class="skill-dots" aria-label="3 dari 5">
+                            <span class="dot on" style="--dot-color:#E34F26;"></span>
+                            <span class="dot on" style="--dot-color:#E34F26;"></span>
+                            <span class="dot on" style="--dot-color:#E34F26;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 60%; background: #E34F26;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>CSS3</span>
-                            <span class="skill-percent" data-target="50">0%</span>
+                        <span class="skill-name">CSS3</span>
+                        <div class="skill-dots" aria-label="3 dari 5">
+                            <span class="dot on" style="--dot-color:#1572B6;"></span>
+                            <span class="dot on" style="--dot-color:#1572B6;"></span>
+                            <span class="dot on" style="--dot-color:#1572B6;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 50%; background: #1572B6;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>Java</span>
-                            <span class="skill-percent" data-target="40">0%</span>
+                        <span class="skill-name">Java</span>
+                        <div class="skill-dots" aria-label="2 dari 5">
+                            <span class="dot on" style="--dot-color:#007396;"></span>
+                            <span class="dot on" style="--dot-color:#007396;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 40%; background: #007396;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>JavaScript</span>
-                            <span class="skill-percent" data-target="40">0%</span>
+                        <span class="skill-name">JavaScript</span>
+                        <div class="skill-dots" aria-label="2 dari 5">
+                            <span class="dot on" style="--dot-color:#F7DF1E;"></span>
+                            <span class="dot on" style="--dot-color:#F7DF1E;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 40%; background: #F7DF1E;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="PHP" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="PHP" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>PHP</span>
-                            <span class="skill-percent" data-target="20">0%</span>
+                        <span class="skill-name">PHP</span>
+                        <div class="skill-dots" aria-label="1 dari 5">
+                            <span class="dot on" style="--dot-color:#777BB4;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 20%; background: #777BB4;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" alt="Kotlin" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" alt="Kotlin" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>Kotlin</span>
-                            <span class="skill-percent" data-target="20">0%</span>
+                        <span class="skill-name">Kotlin</span>
+                        <div class="skill-dots" aria-label="1 dari 5">
+                            <span class="dot on" style="--dot-color:#7F52FF;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 20%; background: #7F52FF;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>Python</span>
-                            <span class="skill-percent" data-target="45">0%</span>
+                        <span class="skill-name">Python</span>
+                        <div class="skill-dots" aria-label="2 dari 5">
+                            <span class="dot on" style="--dot-color:#3776AB;"></span>
+                            <span class="dot on" style="--dot-color:#3776AB;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 45%; background: #3776AB;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" class="skill-icon coding-logo" loading="lazy" decoding="async">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" class="skill-icon" loading="lazy" decoding="async">
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>C++</span>
-                            <span class="skill-percent" data-target="45">0%</span>
+                        <span class="skill-name">C++</span>
+                        <div class="skill-dots" aria-label="2 dari 5">
+                            <span class="dot on" style="--dot-color:#00599C;"></span>
+                            <span class="dot on" style="--dot-color:#00599C;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 45%; background: #00599C;"></div></div>
                     </div>
                 </div>
 
                 <div class="glass-card skill-badge glow-hover">
-                    <svg class="skill-icon coding-logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="skill-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                         <rect width="64" height="64" rx="16" fill="#D32F2F" fill-opacity="0.15" stroke="#D32F2F" stroke-width="3"/>
                         <text x="32" y="42" font-family="Segoe UI, sans-serif" font-weight="900" font-size="28" fill="#D32F2F" text-anchor="middle">?-</text>
                     </svg>
                     <div class="badge-info">
-                        <div class="badge-text-row">
-                            <span>Prolog</span>
-                            <span class="skill-percent" data-target="50">0%</span>
+                        <span class="skill-name">Prolog</span>
+                        <div class="skill-dots" aria-label="3 dari 5">
+                            <span class="dot on" style="--dot-color:#D32F2F;"></span>
+                            <span class="dot on" style="--dot-color:#D32F2F;"></span>
+                            <span class="dot on" style="--dot-color:#D32F2F;"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
-                        <div class="mini-progress"><div class="mini-progress-fill" style="width: 50%; background: #D32F2F;"></div></div>
                     </div>
                 </div>
 
@@ -188,39 +247,144 @@
         </div>
     </main>
 
+    <div class="music-player">
+        <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Klik buat aktifin suara" type="button">
+            <img class="album-art" src="../assets/fotomusik.webp" alt="Album art">
+            <span class="vinyl-center-dot"></span>
+            <span class="pulse-ring"></span>
+            <span class="mute-indicator" id="muteIndicator">🔇</span>
+        </button>
+        <span class="tap-hint" id="tapHint"></span>
+    </div>
+
+    <audio id="bgMusic" src="../assets/musik.mp3" preload="auto" loop autoplay muted></audio>
+
     <script src="../js/main.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const progressFills = document.querySelectorAll('.mini-progress-fill');
-            progressFills.forEach(fill => {
-                const targetWidth = fill.style.width; 
-                fill.style.width = '0%'; 
-                setTimeout(() => {
-                    fill.style.transition = 'width 1.5s cubic-bezier(0.22, 1, 0.36, 1)';
-                    fill.style.width = targetWidth; 
-                }, 200); 
+        // Logika Hamburger Menu
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('open');
+                navToggle.classList.toggle('open', isOpen);
+                navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             });
 
-            const percentTexts = document.querySelectorAll('.skill-percent');
-            percentTexts.forEach(text => {
-                const targetNum = parseInt(text.getAttribute('data-target'));
-                let currentNum = 0;
-                const duration = 1500; 
-                const interval = 20; 
-                const step = (targetNum / duration) * interval;
-                
-                setTimeout(() => {
-                    const counter = setInterval(() => {
-                        currentNum += step;
-                        if(currentNum >= targetNum) {
-                            currentNum = targetNum;
-                            clearInterval(counter); 
-                        }
-                        text.innerText = Math.round(currentNum) + '%';
-                    }, interval);
-                }, 200);
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('open');
+                    navToggle.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
             });
+        }
+    </script>
+
+    <!-- =======================================================
+         MUSIK GLOBAL (persist antar halaman via localStorage)
+         Blok ini SAMA PERSIS di semua halaman (index, skills,
+         languages, projects, dll) supaya posisi lagu & status
+         mute/unmute nyambung terus walau pindah halaman.
+         ======================================================= -->
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggleBtn');
+        const muteIndicator = document.getElementById('muteIndicator');
+        const tapHint = document.getElementById('tapHint');
+
+        const START_TIME_SECONDS = 70; // start default (kunjungan pertama) dari menit 1:10
+        const LS_TIME_KEY = 'lb_music_time';
+        const LS_UNMUTED_KEY = 'lb_music_unmuted';
+
+        let audioUnmuted = false;
+
+        bgMusic.muted = true;
+        bgMusic.volume = 1;
+
+        function startAutoplay() {
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Autoplay ke-block total, musik akan mulai begitu
+                    // user klik ikonnya secara manual.
+                });
+            }
+        }
+
+        function goUnmuted() {
+            bgMusic.muted = false;
+            audioUnmuted = true;
+            localStorage.setItem(LS_UNMUTED_KEY, '1');
+            if (bgMusic.paused) startAutoplay();
+            musicBtn.setAttribute('aria-label', 'Jeda musik');
+            if (muteIndicator) muteIndicator.style.display = 'none';
+            if (tapHint) tapHint.style.display = 'none';
+        }
+
+        function setStartTimeAndPlay() {
+            const savedTime = parseFloat(localStorage.getItem(LS_TIME_KEY));
+            try {
+                bgMusic.currentTime = !isNaN(savedTime) && savedTime > 0 ? savedTime : START_TIME_SECONDS;
+            } catch (e) {
+                // kalau gagal (browser belum siap), abaikan
+            }
+            startAutoplay();
+
+            // Kalau di halaman sebelumnya user udah pernah nyalain suara,
+            // langsung coba unmute otomatis di halaman ini juga.
+            if (localStorage.getItem(LS_UNMUTED_KEY) === '1') {
+                goUnmuted();
+            }
+        }
+
+        if (bgMusic.readyState >= 1) {
+            setStartTimeAndPlay();
+        } else {
+            bgMusic.addEventListener('loadedmetadata', setStartTimeAndPlay, { once: true });
+        }
+
+        function unmuteOnFirstInteraction() {
+            if (!audioUnmuted) {
+                goUnmuted();
+            }
+            document.removeEventListener('click', unmuteOnFirstInteraction);
+            document.removeEventListener('touchstart', unmuteOnFirstInteraction);
+            document.removeEventListener('keydown', unmuteOnFirstInteraction);
+            document.removeEventListener('scroll', unmuteOnFirstInteraction);
+        }
+
+        document.addEventListener('click', unmuteOnFirstInteraction);
+        document.addEventListener('touchstart', unmuteOnFirstInteraction);
+        document.addEventListener('keydown', unmuteOnFirstInteraction);
+        document.addEventListener('scroll', unmuteOnFirstInteraction, { passive: true });
+
+        // Ikon muter cuma pas musik beneran lagi main
+        bgMusic.addEventListener('play', () => musicBtn.classList.add('playing'));
+        bgMusic.addEventListener('pause', () => musicBtn.classList.remove('playing'));
+
+        // Klik ikon = toggle play/pause manual
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+            } else {
+                bgMusic.pause();
+            }
+        });
+
+        // Simpan posisi lagu secara berkala + pas mau pindah halaman
+        let lastSaved = 0;
+        bgMusic.addEventListener('timeupdate', () => {
+            const now = Date.now();
+            if (now - lastSaved > 1500) {
+                lastSaved = now;
+                localStorage.setItem(LS_TIME_KEY, String(bgMusic.currentTime));
+            }
+        });
+        window.addEventListener('pagehide', () => {
+            localStorage.setItem(LS_TIME_KEY, String(bgMusic.currentTime));
         });
     </script>
 </body>

@@ -5,294 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faqih Lakaisha Putra | Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
-    
-    <style>
-        /* Scroll mulus */
-        html { scroll-behavior: smooth; }
-
-        /* Styling dasar biar rapi */
-        .hero-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 100vh;
-            padding: 0 5%;
-            gap: 2rem;
-        }
-
-        .welcome-text {
-            color: var(--accent-magenta);
-            letter-spacing: 2px;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .main-title {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        .desc-text {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            margin-bottom: 2.5rem;
-            max-width: 500px;
-        }
-
-        /* 📱 MEDIA QUERY: PENGATURAN KHUSUS UNTUK HP (MOBILE) */
-        @media (max-width: 768px) {
-            .hero-section {
-                flex-direction: column; /* Susun ke bawah (Teks di atas, Gambar di bawah) */
-                text-align: center;
-                padding-top: 120px; /* Jarak aman dari navbar */
-                justify-content: center;
-            }
-            
-            .hero-content {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .main-title {
-                font-size: 2.5rem; /* Font dikecilin biar muat di HP */
-            }
-
-            .desc-text {
-                font-size: 1rem;
-            }
-
-            .navbar {
-                padding: 10px;
-            }
-        }
-
-        /* =======================================================
-           FLOATING MUSIC PLAYER (pojok kiri bawah)
-           ======================================================= */
-        .music-player {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .music-toggle-btn {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: #000;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            padding: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .music-toggle-btn:hover {
-            border-color: var(--accent-magenta);
-            box-shadow: 0 10px 30px rgba(207, 90, 240, 0.4);
-            transform: translateY(-3px);
-        }
-
-        /* Gambar album (thumbnail lagu) */
-        .album-art {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border-radius: 50%;
-        }
-
-        /* Titik tengah piringan biar kesan vinyl record */
-        .vinyl-center-dot {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 13px; height: 13px;
-            background: #06020d;
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* Album art muter selama lagu main */
-        .music-toggle-btn.playing .album-art {
-            animation: spinDisc 4s linear infinite;
-        }
-
-        /* Cincin pulse pas lagu lagi main */
-        .pulse-ring {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            border: 1px solid var(--accent-magenta);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .music-toggle-btn.playing .pulse-ring {
-            animation: pulseRing 1.8s ease-out infinite;
-        }
-
-        /* Indikator kecil "belum ada suara" sebelum user interaksi */
-        .mute-indicator {
-            position: absolute;
-            bottom: 0; right: 0;
-            width: 24px; height: 24px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            z-index: 3;
-        }
-
-        @keyframes spinDisc {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes pulseRing {
-            0% { transform: scale(1); opacity: 0.6; }
-            100% { transform: scale(1.7); opacity: 0; }
-        }
-
-        @media (max-width: 768px) {
-            .music-player { bottom: 18px; left: 18px; }
-            .music-toggle-btn { width: 64px; height: 64px; }
-            .vinyl-center-dot { width: 10px; height: 10px; }
-            .mute-indicator { width: 20px; height: 20px; font-size: 11px; }
-            .tap-hint { left: 70px; font-size: 0.75rem; padding: 6px 12px; }
-        }
-
-        /* Hint kecil "tap buat suara" yang muncul di awal terus fade out */
-        .tap-hint {
-            position: absolute;
-            left: 92px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(6, 2, 13, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 30px;
-            white-space: nowrap;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            animation: hintPulse 2s ease-in-out infinite, hintFadeOut 0.5s ease 6s forwards;
-            pointer-events: none;
-        }
-
-        @keyframes hintPulse {
-            0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-50%) scale(1.04); }
-        }
-
-        @keyframes hintFadeOut {
-            to { opacity: 0; visibility: hidden; }
-        }
-
-        /* =======================================================
-           HAMBURGER MENU (biar nav-links tetep bisa diakses di HP)
-           ======================================================= */
-        .nav-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 24px;
-            height: 18px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            z-index: 1001;
-            padding: 0;
-        }
-
-        .nav-toggle span {
-            display: block;
-            height: 2.5px;
-            width: 100%;
-            background: var(--text-main);
-            border-radius: 2px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .nav-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-        .nav-toggle.open span:nth-child(2) { opacity: 0; }
-        .nav-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-
-        @media (max-width: 768px) {
-            .nav-toggle { display: flex; }
-
-            /* Override .nav-links { display:none } dari style.css */
-            .nav-links {
-                display: flex !important;
-                flex-direction: column;
-                width: 100%;
-                gap: 0;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                margin-top: 12px;
-                background: linear-gradient(180deg, rgba(6, 2, 13, 0.82), rgba(25, 10, 45, 0.72));
-                backdrop-filter: blur(24px);
-                -webkit-backdrop-filter: blur(24px);
-                border: 1px solid var(--glass-border);
-                border-top: 1px solid var(--glass-highlight);
-                border-left: 1px solid var(--glass-highlight);
-                border-radius: 20px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.05);
-                overflow: hidden;
-                max-height: 0;
-                opacity: 0;
-                pointer-events: none;
-                transition: max-height 0.35s ease, opacity 0.25s ease;
-            }
-
-            .nav-links li a {
-                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-                font-weight: 600;
-            }
-
-            .nav-links.open {
-                max-height: 400px;
-                opacity: 1;
-                pointer-events: auto;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links li a {
-                display: block;
-                padding: 14px;
-                border-top: 1px solid rgba(255, 255, 255, 0.08);
-            }
-
-            .nav-links li:first-child a {
-                border-top: none;
-            }
-        }
-    </style>
 </head>
 <body>
     <div id="intro-splash" class="splash-overlay-3d">
@@ -342,7 +54,7 @@
 
     <header class="navbar">
         <nav class="nav-container">
-            <div class="logo">Lakaisha<span class="text-gradient">.</span></div>
+            <div class="logo">Lakaisha Builds<span class="text-gradient">.</span></div>
 
             <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
                 <span></span>
@@ -351,25 +63,44 @@
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#languages">Languages</a></li>
-                <li><a href="#achievements">Achievements</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-            </ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/skills.html">Skills</a></li>
+                <li><a href="pages/languages.html">Languages</a></li>
+                <li><a href="pages/projects.html">Projects</a></li>
+             </ul>
         </nav>
     </header>
 
     <main id="home" class="page-section hero-section">
         <div class="hero-content fade-in">
-            <h2 class="welcome-text">WELCOME TO MY SPACE</h2>
-            <h1 class="main-title">Hi, I'm <br><span class="text-gradient">Faqih Lakaisha Putra</span></h1>
+
+            <!-- Kotak sosmed, ganti "WELCOME TO MY SPACE" -->
+            <div class="social-row">
+                <a href="#" class="social-icon-btn" aria-label="GitHub" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.98 3.22 9.2 7.7 10.7.56.1.77-.24.77-.54 0-.27-.01-1.15-.02-2.09-3.13.68-3.79-1.34-3.79-1.34-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.94.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.44.11-3 0 0 .95-.3 3.11 1.16a10.8 10.8 0 0 1 5.66 0C17.35 5.36 18.3 5.66 18.3 5.66c.61 1.56.23 2.72.11 3 .72.79 1.16 1.79 1.16 3.02 0 4.32-2.63 5.28-5.14 5.56.4.35.76 1.03.76 2.08 0 1.5-.01 2.72-.01 3.09 0 .3.2.65.78.54 4.47-1.5 7.69-5.72 7.69-10.7C23.02 5.24 18.27.5 12 .5z"/></svg>
+                </a>
+                <a href="#" class="social-icon-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.78C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.78 24h20.44c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+                </a>
+                <a href="#" class="social-icon-btn" aria-label="Instagram" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 0 1 1.77 1.15 4.9 4.9 0 0 1 1.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.16-.46-.35-1.26-.4-2.43C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43a4.9 4.9 0 0 1 1.15-1.77A4.9 4.9 0 0 1 5.59 1.8c.46-.16 1.26-.35 2.43-.4C9.29 1.34 9.67 1.33 12 1.33m0-1.2C8.74.13 8.33.14 7.05.2c-1.27.06-2.15.26-2.91.56a7.1 7.1 0 0 0-2.57 1.68A7.1 7.1 0 0 0 .89 5.01c-.3.76-.5 1.64-.56 2.91C.27 9.2.26 9.61.26 12.87s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a7.1 7.1 0 0 0 1.68 2.57 7.1 7.1 0 0 0 2.57 1.68c.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a7.1 7.1 0 0 0 2.57-1.68 7.1 7.1 0 0 0 1.68-2.57c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a7.1 7.1 0 0 0-1.68-2.57A7.1 7.1 0 0 0 19.86.76c-.76-.3-1.64-.5-2.91-.56C15.67.14 15.26.13 12 .13z"/><path d="M12 6.35a5.65 5.65 0 1 0 0 11.3 5.65 5.65 0 0 0 0-11.3zm0 9.32a3.67 3.67 0 1 1 0-7.34 3.67 3.67 0 0 1 0 7.34z"/><circle cx="18.4" cy="5.6" r="1.32"/></svg>
+                </a>
+                <a href="#" class="social-icon-btn" aria-label="TikTok" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M16.6 5.82a4.7 4.7 0 0 1-1.03-2.83h-3.1v13.44a2.8 2.8 0 1 1-2-2.68V10.6a5.8 5.8 0 1 0 5.1 5.75V9.4a7.7 7.7 0 0 0 4.5 1.44V7.75a4.7 4.7 0 0 1-3.47-1.93z"/></svg>
+                </a>
+                <a href="mailto:youremail@example.com" class="social-icon-btn" aria-label="Email">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+            </div>
+
+            <h1 class="main-title">Hi, I'm <span class="text-gradient">Lakaisha</span></h1>
             <p class="desc-text">
                 Computer Science Student. Passionate about Web Development, Data Science, and creating logical solutions.
             </p>
-            <div style="display: flex; gap: 1.5rem;">
-                <button onclick="window.location.href='#projects'" class="btn-primary">Explore Projects</button>
+
+            <div class="fun-fact-wrap">
+                <span class="fun-fact-text" id="funFactText"></span><span class="fun-fact-cursor"></span>
             </div>
         </div>
         
@@ -382,15 +113,136 @@
         </div>
     </main>
 
-    <section id="skills" class="page-section"></section>
-    <section id="languages" class="page-section"></section>
-    <section id="achievements" class="page-section"></section>
-    <section id="projects" class="page-section"></section>
-    <section id="experience" class="page-section"></section>
-
     <!-- =======================================================
-         FLOATING MUSIC PLAYER
+         JOURNEY: Experience + Achievements (digabung di sini,
+         gak bikin halaman baru, tinggal scroll dari Home)
          ======================================================= -->
+    <section id="journey" class="journey-section">
+        <div class="journey-eyebrow">MY JOURNEY SO FAR</div>
+        <p class="journey-lead">Sekilas tempat aku pernah kerja, apa yang udah dibangun, sama beberapa pencapaian di kompetisi.</p>
+
+        <div class="journey-columns">
+            <div class="journey-col">
+                <h2>Experience</h2>
+
+                <div class="timeline-item">
+                    <div class="timeline-rail">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-line"></span>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="timeline-thumb-row">
+                            <div class="timeline-thumb"><img src="assets/kerja-balam.webp" alt="Balamcubes"></div>
+                            <span class="timeline-badge" style="background: rgba(207, 90, 240, 0.15); color: var(--accent-magenta);">
+                                <span class="timeline-pulse-dot"></span> Still Active
+                            </span>
+                        </div>
+                        <div class="timeline-title">Content Creator & Talent</div>
+                        <div class="timeline-org">Balamcubes Rubik's Shop</div>
+                        <p class="timeline-desc">
+                            My main job is making Rubik's videos for Balamcubes. I handle everything from writing the scripts to editing the final video.
+                            I've made <strong>400+ short videos</strong> so far and they've reached <strong>millions of views</strong> across all platforms.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-rail">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-line"></span>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="timeline-thumb-row">
+                            <div class="timeline-thumb"><img src="assets/gambar-fanztime.webp" alt="Fanztime Event"></div>
+                            <span class="timeline-badge" style="background: rgba(138, 43, 226, 0.15); color: var(--accent-purple);">Community</span>
+                        </div>
+                        <div class="timeline-title">Event Organizer</div>
+                        <div class="timeline-org">Fanztime Online Competition</div>
+                        <p class="timeline-desc">
+                            I've organized <strong>11 online Rubik's competitions</strong> through Fanztime. Managed over <strong>500+ participants</strong> from all over Indonesia and handled all the match brackets and logistics.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-rail">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-line"></span>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="timeline-thumb-row">
+                            <div class="timeline-thumb"><img src="assets/panitia-karate.webp" alt="Karate Committee"></div>
+                            <span class="timeline-badge" style="background: rgba(77, 77, 255, 0.15); color: var(--accent-blue);">Sports</span>
+                        </div>
+                        <div class="timeline-title">Tournament Committee</div>
+                        <div class="timeline-org">Karate Championships</div>
+                        <p class="timeline-desc">
+                            Worked as part of the committee for two Karate tournaments. Mostly helped with organizing participants and making sure the matches ran smoothly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journey-col">
+                <h2>Achievements</h2>
+
+                <div class="timeline-item">
+                    <div class="timeline-rail">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-line"></span>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="timeline-thumb-row">
+                            <div class="timeline-thumb"><img src="assets/gambar-juara3.webp" alt="INTAR UNILA Championship"></div>
+                            <span class="timeline-badge" style="background: rgba(207, 90, 240, 0.15); color: var(--accent-magenta);">National Level</span>
+                        </div>
+                        <div class="timeline-title">3rd Place - INTAR UNILA</div>
+                        <div class="timeline-org">-84kg Kumite Senior category</div>
+                        <p class="timeline-desc">
+                            Achieved 3rd place in the National Level Karate Championship <strong>INTAR UNILA</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-rail">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-line"></span>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="timeline-thumb-row">
+                            <div class="timeline-thumb"><img src="assets/gambar-juara2.webp" alt="Governor's Cup Karate"></div>
+                            <span class="timeline-badge" style="background: rgba(138, 43, 226, 0.15); color: var(--accent-purple);">Provincial Level</span>
+                        </div>
+                        <div class="timeline-title">2nd Place - Governor's Cup</div>
+                        <div class="timeline-org">Piala Gubernur, -84kg category</div>
+                        <p class="timeline-desc">
+                            Secured the Silver Medal (2nd Place) in the Provincial Level Karate Championship.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-rail">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-line"></span>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="timeline-thumb-row">
+                            <div class="timeline-thumb"><img src="assets/gambar-pramuka.webp" alt="LKBB Pramuka UNILA"></div>
+                            <span class="timeline-badge" style="background: rgba(77, 77, 255, 0.15); color: var(--accent-blue);">National Level</span>
+                        </div>
+                        <div class="timeline-title">2nd Place - LKBB Pramuka UNILA</div>
+                        <div class="timeline-org">Line-to-Line Command Competition</div>
+                        <p class="timeline-desc">
+                            Won 2nd place in the National Level LKBB organized by Pramuka UNILA during high school.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="music-player">
         <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Klik buat aktifin suara" type="button">
             <img class="album-art" src="assets/fotomusik.webp" alt="Album art">
@@ -401,9 +253,6 @@
         <span class="tap-hint" id="tapHint"></span>
     </div>
 
-    <!-- Audio musik, disembunyikan (cuma buat suara).
-         Atribut autoplay+muted dipasang langsung di HTML sebagai
-         lapisan cadangan selain JS, biar makin reliable di semua browser. -->
     <audio id="bgMusic" src="assets/musik.mp3" preload="auto" loop autoplay muted></audio>
 
     <script>
@@ -441,18 +290,23 @@
     </script>
 
     <!-- =======================================================
-         LOGIKA MUSIC PLAYER (HTML5 audio lokal)
+         MUSIK GLOBAL (persist antar halaman via localStorage)
+         Blok ini SAMA PERSIS di semua halaman (index, skills,
+         languages, projects, dll) supaya posisi lagu & status
+         mute/unmute nyambung terus walau pindah halaman.
          ======================================================= -->
     <script>
         const bgMusic = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicToggleBtn');
         const muteIndicator = document.getElementById('muteIndicator');
         const tapHint = document.getElementById('tapHint');
+
+        const START_TIME_SECONDS = 70; // start default (kunjungan pertama) dari menit 1:10
+        const LS_TIME_KEY = 'lb_music_time';
+        const LS_UNMUTED_KEY = 'lb_music_unmuted';
+
         let audioUnmuted = false;
 
-        const START_TIME_SECONDS = 70; // mulai dari menit 1:10
-
-        // Browser cuma ngizinin autoplay kalau di-mute dulu.
         bgMusic.muted = true;
         bgMusic.volume = 1;
 
@@ -460,21 +314,36 @@
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.catch(() => {
-                    // Autoplay ke-block total (browser tertentu), musik akan
-                    // mulai begitu user klik ikonnya secara manual.
+                    // Autoplay ke-block total, musik akan mulai begitu
+                    // user klik ikonnya secara manual.
                 });
             }
         }
 
-        // Set posisi awal ke 1:10 begitu durasi lagu udah kebaca,
-        // baru abis itu mulai autoplay.
+        function goUnmuted() {
+            bgMusic.muted = false;
+            audioUnmuted = true;
+            localStorage.setItem(LS_UNMUTED_KEY, '1');
+            if (bgMusic.paused) startAutoplay();
+            musicBtn.setAttribute('aria-label', 'Jeda musik');
+            if (muteIndicator) muteIndicator.style.display = 'none';
+            if (tapHint) tapHint.style.display = 'none';
+        }
+
         function setStartTimeAndPlay() {
+            const savedTime = parseFloat(localStorage.getItem(LS_TIME_KEY));
             try {
-                bgMusic.currentTime = START_TIME_SECONDS;
+                bgMusic.currentTime = !isNaN(savedTime) && savedTime > 0 ? savedTime : START_TIME_SECONDS;
             } catch (e) {
-                // Kalau gagal (browser lagi belum siap), abaikan, tetap coba play dari awal
+                // kalau gagal (browser belum siap), abaikan
             }
             startAutoplay();
+
+            // Kalau di halaman sebelumnya user udah pernah nyalain suara,
+            // langsung coba unmute otomatis di halaman ini juga.
+            if (localStorage.getItem(LS_UNMUTED_KEY) === '1') {
+                goUnmuted();
+            }
         }
 
         if (bgMusic.readyState >= 1) {
@@ -483,16 +352,9 @@
             bgMusic.addEventListener('loadedmetadata', setStartTimeAndPlay, { once: true });
         }
 
-        // Begitu user interaksi apa aja (klik/scroll/sentuh/keyboard),
-        // suara langsung dinyalain otomatis — berasa autoplay beneran.
         function unmuteOnFirstInteraction() {
             if (!audioUnmuted) {
-                bgMusic.muted = false;
-                audioUnmuted = true;
-                if (bgMusic.paused) startAutoplay();
-                musicBtn.setAttribute('aria-label', 'Jeda musik');
-                if (muteIndicator) muteIndicator.style.display = 'none';
-                if (tapHint) tapHint.style.display = 'none';
+                goUnmuted();
             }
             document.removeEventListener('click', unmuteOnFirstInteraction);
             document.removeEventListener('touchstart', unmuteOnFirstInteraction);
@@ -517,6 +379,102 @@
                 bgMusic.pause();
             }
         });
+
+        // Simpan posisi lagu secara berkala + pas mau pindah halaman,
+        // supaya halaman berikutnya bisa lanjut dari waktu yang sama.
+        let lastSaved = 0;
+        bgMusic.addEventListener('timeupdate', () => {
+            const now = Date.now();
+            if (now - lastSaved > 1500) {
+                lastSaved = now;
+                localStorage.setItem(LS_TIME_KEY, String(bgMusic.currentTime));
+            }
+        });
+        window.addEventListener('pagehide', () => {
+            localStorage.setItem(LS_TIME_KEY, String(bgMusic.currentTime));
+        });
+    </script>
+
+    <!-- =======================================================
+         SCROLL REVEAL untuk section Journey (garis + animasi)
+         ======================================================= -->
+    <script>
+        (function () {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+
+            // Stagger tiap item per kolom biar munculnya gantian, gak bareng
+            document.querySelectorAll('#journey .journey-col').forEach((col) => {
+                col.querySelectorAll('.timeline-item').forEach((item, i) => {
+                    item.style.transitionDelay = (i * 0.15) + 's';
+                    revealObserver.observe(item);
+                });
+            });
+
+            document.querySelectorAll('#journey .journey-eyebrow, #journey .journey-lead')
+                .forEach((el) => revealObserver.observe(el));
+        })();
+    </script>
+
+    <!-- =======================================================
+         FUN FACT TYPEWRITER EFFECT
+         ======================================================= -->
+    <script>
+        (function () {
+            const funFacts = [
+                "I love cube 🧩",
+                "I love cats 🐱",
+                "Aku suka belajar hal baru",
+                "Ngoding sambil dengerin musik",
+                "Prompt engineering is my thing",
+                "400+ Rubik's videos and counting"
+            ];
+
+            const el = document.getElementById('funFactText');
+            if (!el) return;
+
+            let factIndex = 0;
+            let charIndex = 0;
+            let deleting = false;
+
+            const TYPE_SPEED = 70;
+            const DELETE_SPEED = 40;
+            const PAUSE_AFTER_TYPE = 1600;
+            const PAUSE_AFTER_DELETE = 300;
+
+            function tick() {
+                const current = funFacts[factIndex];
+
+                if (!deleting) {
+                    charIndex++;
+                    el.textContent = current.slice(0, charIndex);
+                    if (charIndex === current.length) {
+                        deleting = true;
+                        setTimeout(tick, PAUSE_AFTER_TYPE);
+                        return;
+                    }
+                    setTimeout(tick, TYPE_SPEED);
+                } else {
+                    charIndex--;
+                    el.textContent = current.slice(0, charIndex);
+                    if (charIndex === 0) {
+                        deleting = false;
+                        factIndex = (factIndex + 1) % funFacts.length;
+                        setTimeout(tick, PAUSE_AFTER_DELETE);
+                        return;
+                    }
+                    setTimeout(tick, DELETE_SPEED);
+                }
+            }
+
+            tick();
+        })();
     </script>
 
     <script src="js/main.js"></script>

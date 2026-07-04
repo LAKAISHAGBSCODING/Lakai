@@ -93,11 +93,13 @@ body {
 
 /* =======================================================
    4. NAVIGASI (MODERN CLEAR GLASS PILL)
+   Navbar sudah position: fixed -> otomatis tetap di tempatnya
+   walau halaman di-scroll. z-index tinggi biar selalu di atas.
    ======================================================= */
 .navbar {
-    position: fixed;
-    top: 25px; left: 50%; transform: translateX(-50%); 
-    width: 90%; max-width: 1000px; z-index: 1000;
+    position: relative;
+    margin: 25px auto 0;
+    width: 90%; max-width: 780px; z-index: 1000;
     background: rgba(255, 255, 255, 0.03); 
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.15); 
@@ -108,17 +110,43 @@ body {
 
 .nav-container {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1rem 2.5rem; margin: 0 auto;
+    padding: 1rem 2rem; margin: 0 auto; position: relative;
 }
 
 .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 1px; }
-.nav-links { display: flex; list-style: none; gap: 2.5rem; }
+.nav-links { display: flex; list-style: none; gap: 2rem; }
 .nav-links a {
     text-decoration: none; color: var(--text-dim);
     font-weight: 500; font-size: 1rem;
     transition: all 0.3s ease; position: relative;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--text-main); text-shadow: 0 0 10px var(--accent-magenta); }
+.nav-links li a { font-weight: 700; }
+
+/* Hamburger menu (dipakai cuma di mobile, lihat section 12) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 0;
+}
+.nav-toggle span {
+    display: block;
+    height: 2.5px;
+    width: 100%;
+    background: var(--text-main);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
 /* =======================================================
    5. GLASSMORPHISM & SISTEM GLOW
@@ -148,7 +176,7 @@ body {
 .glow-text { text-shadow: 0 0 20px rgba(207, 90, 240, 0.4); }
 
 /* 🚨 FIX JARAK KOSONG: min-height dihapus, diganti padding menyesuaikan konten */
-.page-section { padding: 100px 5% 50px 5%; max-width: 1200px; margin: 0 auto; min-height: auto; }
+.page-section { padding: 40px 5% 50px 5%; max-width: 1200px; margin: 0 auto; min-height: auto; }
 .section-title { font-size: 3rem; text-align: center; margin-bottom: 3rem; }
 
 .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -158,13 +186,19 @@ body {
    7. HALAMAN UTAMA (INDEX.HTML) - HERO SECTION
    ======================================================= */
 .hero-section {
-    min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 4rem; padding-top: 80px; max-width: 1200px; margin: 0 auto; padding-left: 5%; padding-right: 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; min-height: 100vh; max-width: 1200px; margin: 0 auto;
+    padding: 0 5%; gap: 2rem;
 }
 
 .hero-content { flex: 1; min-width: 300px; }
 .sub-heading { color: var(--text-dim); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; letter-spacing: 2px; text-transform: uppercase; }
 .main-heading { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+
+/* Judul & deskripsi hero versi index.html saat ini */
+.main-title { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+.desc-text { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 1.6rem; max-width: 500px; }
+
 .hero-desc { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 500px; }
 .cta-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 .hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
@@ -202,6 +236,64 @@ body {
 }
 @keyframes floatBubbleModern { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-5px, -15px) rotate(1deg); } }
 
+/* Baris ikon sosmed (ganti "WELCOME TO MY SPACE") */
+.social-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 2.2rem;
+    flex-wrap: wrap;
+}
+.social-icon-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.social-icon-btn:hover {
+    border-color: var(--accent-magenta);
+    box-shadow: 0 10px 24px rgba(207, 90, 240, 0.28);
+    transform: translateY(-3px);
+    background: rgba(207, 90, 240, 0.08);
+}
+.social-icon-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Fun fact typewriter (ganti tombol "Explore Projects") -
+   plain & simpel: teks terang polos + kursor tipis */
+.fun-fact-wrap {
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    min-height: 1.8em;
+    display: flex;
+    align-items: center;
+    color: var(--text-main);
+}
+.fun-fact-text {
+    color: var(--text-main);
+}
+.fun-fact-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.15em;
+    background: var(--accent-blue);
+    margin-left: 3px;
+    animation: cursorBlink 0.9s steps(1) infinite;
+}
+@keyframes cursorBlink {
+    50% { opacity: 0; }
+}
+
 /* =======================================================
    8. GRID & TOMBOL FILTER
    ======================================================= */
@@ -227,12 +319,34 @@ body {
     object-fit: contain; object-position: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     filter: drop-shadow(0 0 5px rgba(255,255,255,0.05));
 }
-.badge-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.badge-text-row { display: flex; justify-content: space-between; align-items: center; }
-.badge-text-row span:first-child { font-size: 1rem; font-weight: 600; letter-spacing: 0.5px; color: var(--text-main); }
-.badge-text-row .skill-percent { font-size: 0.85rem; color: var(--text-dim); font-weight: 500; }
-.mini-progress { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; }
-.mini-progress-fill { height: 100%; border-radius: 10px; transition: width 1.5s ease-out; }
+.badge-info { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.skill-name { font-size: 1rem; font-weight: 600; letter-spacing: 0.5px; color: var(--text-main); }
+
+/* Dot-rating: pengganti progress bar & angka persen, lebih stylish & simpel */
+.skill-dots { display: flex; align-items: center; gap: 7px; }
+.dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.dot.on {
+    background: var(--dot-color, var(--accent-magenta));
+    box-shadow: 0 0 8px var(--dot-color, var(--accent-magenta));
+}
+.skill-badge:hover .dot.on { transform: scale(1.25); }
+
+/* Fallback "monogram" badge buat tools yang gak punya logo resmi/stabil,
+   biar tetap rapi & gak pakai logo abal-abal */
+.icon-tile {
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+.icon-tile-text {
+    color: #fff; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
 .skill-badge:hover .skill-icon { transform: scale(1.15) translateY(-3px); filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.3)); }
 
 .soft-skill-grid { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -305,17 +419,67 @@ body {
    12. RESPONSIVE DESIGN (MOBILE VIEW)
    ======================================================= */
 @media (max-width: 768px) {
-    .navbar { top: 15px; width: 95%; }
-    .nav-links { display: none; }
-    
+    .navbar { margin-top: 15px; width: 95%; }
+    .nav-container { padding: 0.85rem 1.4rem; }
+    .nav-toggle { display: flex; }
+
+    /* Dropdown menu mobile (dibuka lewat hamburger) */
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 12px;
+        background: linear-gradient(180deg, rgba(6, 2, 13, 0.9), rgba(25, 10, 45, 0.82));
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid var(--glass-border);
+        border-top: 1px solid var(--glass-highlight);
+        border-left: 1px solid var(--glass-highlight);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.35s ease, opacity 0.25s ease;
+    }
+    .nav-links.open {
+        max-height: 400px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .nav-links li { width: 100%; text-align: center; }
+    .nav-links li a {
+        display: block;
+        padding: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+    .nav-links li:first-child a { border-top: none; }
+
     .main-heading { font-size: 2.5rem; }
-    .hero-section { text-align: center; justify-content: center; padding-top: 120px; }
+    .main-title { font-size: 2.5rem; }
+    .desc-text { font-size: 1rem; }
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        padding-top: 40px;
+    }
+    .hero-content { display: flex; flex-direction: column; align-items: center; }
     .cta-group { justify-content: center; }
+    .social-row { justify-content: center; }
+    .fun-fact-wrap { justify-content: center; }
+    .hero-image { margin-top: 50px; }
     .glass-sphere { width: 250px; height: 250px; }
-    .speech-bubble { right: -10px; top: -50px; }
-    
+    .speech-bubble { right: 10px; top: -20px; max-width: 210px; font-size: 0.82rem; }
+
     .section-title { font-size: 2.2rem; }
-    .page-section { padding-top: 110px; }
+    .page-section { padding-top: 50px; }
     
     .soft-skill-item { flex-direction: column; text-align: center; }
     .skill-icon-wrapper { margin-right: 0 !important; margin-bottom: 1rem; }
@@ -325,6 +489,144 @@ body {
     
     .project-row { flex-direction: column; padding: 1.2rem; gap: 1.5rem; }
     .project-media-side { width: 100%; height: 200px; }
+
+    .music-player { bottom: 18px; left: 18px; }
+    .music-toggle-btn { width: 64px; height: 64px; }
+    .vinyl-center-dot { width: 10px; height: 10px; }
+    .mute-indicator { width: 20px; height: 20px; font-size: 11px; }
+    .tap-hint { left: 70px; font-size: 0.75rem; padding: 6px 12px; }
+
+    .journey-section { padding: 70px 6% 110px; }
+    .journey-col h2 { font-size: 1.5rem; }
+    .timeline-thumb { width: 40px; height: 40px; border-radius: 10px; }
+    .timeline-title { font-size: 1rem; }
+}
+
+/* =======================================================
+   13. FLOATING MUSIC PLAYER (pojok kiri bawah)
+   ======================================================= */
+.music-player {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-toggle-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #000;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.music-toggle-btn:hover {
+    border-color: var(--accent-magenta);
+    box-shadow: 0 10px 30px rgba(207, 90, 240, 0.4);
+    transform: translateY(-3px);
+}
+
+.album-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+}
+
+.vinyl-center-dot {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 13px; height: 13px;
+    background: #06020d;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.music-toggle-btn.playing .album-art {
+    animation: spinDisc 4s linear infinite;
+}
+
+.pulse-ring {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--accent-magenta);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.music-toggle-btn.playing .pulse-ring {
+    animation: pulseRing 1.8s ease-out infinite;
+}
+
+.mute-indicator {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 24px; height: 24px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    z-index: 3;
+}
+
+@keyframes spinDisc {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulseRing {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.7); opacity: 0; }
+}
+
+.tap-hint {
+    position: absolute;
+    left: 92px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(6, 2, 13, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 30px;
+    white-space: nowrap;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    animation: hintPulse 2s ease-in-out infinite, hintFadeOut 0.5s ease 6s forwards;
+    pointer-events: none;
+}
+
+@keyframes hintPulse {
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.04); }
+}
+
+@keyframes hintFadeOut {
+    to { opacity: 0; visibility: hidden; }
 }
 
 /* =======================================================
@@ -448,14 +750,190 @@ body {
     pointer-events: none;
 }
 
+/* Versi HP: foto & teks sejajar (mirip layout desktop), potongan
+   diagonal foto tetap ada, bukan ditumpuk vertikal */
 @media (max-width: 650px) {
-    .splash-card-compact-3d { flex-direction: column-reverse; padding: 2rem; gap: 2rem; align-items: center; border-radius: 8px;}
-    .compact-photo-3d { justify-content: center; width: 100%; transform: translateZ(40px); }
-    .photo-frame-compact { width: 140px; height: 190px; clip-path: none; border-radius: 8px; }
-    .compact-info-3d { width: 100%; text-align: center; transform: translateZ(30px); }
-    .compact-name-new { font-size: 2.5rem; }
-    .tech-badge-new { margin: 0 auto 1rem auto; }
-    .compact-data-list { text-align: left; background: rgba(0,0,0,0.25); padding: 15px; border-radius: 6px;}
-    .btn-portal-glass { font-size: 0.8rem;}
+    .splash-card-compact-3d {
+        flex-direction: row;
+        padding: 1.4rem;
+        gap: 1.2rem;
+        align-items: center;
+        border-radius: 12px;
+    }
+    .compact-photo-3d {
+        flex: 0 0 110px;
+        justify-content: center;
+        transform: translateZ(40px);
+    }
+    .photo-frame-compact {
+        width: 110px; height: 160px;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 85% 100%, 0 100%);
+        border-radius: 8px;
+    }
+    .compact-info-3d { flex: 1.4; text-align: left; transform: translateZ(30px); }
+    .compact-name-new { font-size: 2rem; margin: 0.6rem 0; }
+    .tech-badge-new { margin: 0; }
+    .compact-data-list {
+        text-align: left; background: rgba(0,0,0,0.25);
+        padding: 12px; border-radius: 6px; margin-bottom: 1.4rem;
+    }
+    .btn-portal-glass { font-size: 0.78rem; padding: 12px 0; }
     .corner-accent-top { display: none; }
+}
+
+/* =======================================================
+   15. JOURNEY SECTION (Experience + Achievements di index.html)
+   ======================================================= */
+.journey-section {
+    padding: 100px 5% 140px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.journey-eyebrow {
+    font-family: monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--accent-magenta);
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+.journey-eyebrow.in-view { opacity: 1; transform: translateY(0); }
+
+.journey-lead {
+    color: var(--text-dim);
+    max-width: 560px;
+    margin-bottom: 3.5rem;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .6s ease .08s, transform .6s ease .08s;
+}
+.journey-lead.in-view { opacity: 1; transform: translateY(0); }
+
+.journey-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.5rem;
+}
+
+.journey-col h2 {
+    font-size: 1.9rem;
+    margin-bottom: 2.4rem;
+    font-weight: 700;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 18px;
+    position: relative;
+    padding-bottom: 2.3rem;
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    transition: opacity .7s cubic-bezier(.22,.9,.32,1), transform .7s cubic-bezier(.22,.9,.32,1);
+}
+.timeline-item.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-rail {
+    width: 14px;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.timeline-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent-magenta);
+    box-shadow: 0 0 0 5px rgba(207, 90, 240, 0.15);
+    margin-top: 6px;
+    z-index: 2;
+    flex-shrink: 0;
+}
+.timeline-line {
+    position: absolute;
+    top: 17px;
+    bottom: -2.3rem;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-magenta), rgba(255,255,255,0.05));
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top;
+    transition: transform 1s cubic-bezier(.22,.9,.32,1) .15s;
+}
+.timeline-item:last-child .timeline-line { display: none; }
+.timeline-item.in-view .timeline-line { transform: translateX(-50%) scaleY(1); }
+
+.timeline-body { flex: 1; min-width: 0; padding-bottom: 0.4rem; }
+
+.timeline-thumb-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.timeline-thumb {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.04);
+    flex-shrink: 0;
+}
+.timeline-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.timeline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-family: monospace;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+.timeline-pulse-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-magenta);
+    display: inline-block;
+    animation: timelinePulse 1.6s infinite;
+}
+@keyframes timelinePulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.6); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.timeline-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.timeline-org {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+.timeline-desc {
+    color: var(--text-dim);
+    font-size: 0.87rem;
+    line-height: 1.55;
+}
+.timeline-desc strong { color: var(--text-main); }
+
+@media (max-width: 900px) {
+    .journey-columns { grid-template-columns: 1fr; gap: 3rem; }
 }
