@@ -106,7 +106,7 @@
         
         <div class="hero-image fade-in">
             <div class="speech-bubble">
-                "in another life aku gamau masuk ilmu komputer"
+                <span id="bubbleText"></span><span class="bubble-cursor"></span>
             </div>
             <div class="glass-sphere" style="background-image: url('assets/gambar-faqih.webp'); background-size: cover; background-position: center; border: 3px solid rgba(255, 255, 255, 0.4);">
             </div>
@@ -120,6 +120,13 @@
     <section id="journey" class="journey-section">
         <div class="journey-eyebrow">MY JOURNEY SO FAR</div>
         <p class="journey-lead">Sekilas tempat aku pernah kerja, apa yang udah dibangun, sama beberapa pencapaian di kompetisi.</p>
+
+        <div class="journey-cta-wrap">
+            <a href="pages/projects.html" class="journey-cta-btn">
+                <span class="pulse-dot-magenta"></span>
+                <span>Lihat Project Saya</span>
+            </a>
+        </div>
 
         <div class="journey-columns">
             <div class="journey-col">
@@ -263,6 +270,13 @@
         function masukKePortfolio() {
             sessionStorage.setItem('splashSudahDilihat', 'true');
             splash.classList.add('exit-animation-3d');
+
+            // Langsung nyalain musik tepat pas tombol ini diklik,
+            // baik di HP maupun laptop, gak nunggu interaksi lain.
+            if (typeof goUnmuted === 'function') {
+                goUnmuted();
+            }
+
             setTimeout(() => {
                 splash.style.display = 'none';
             }, 800);
@@ -417,8 +431,64 @@
                 });
             });
 
-            document.querySelectorAll('#journey .journey-eyebrow, #journey .journey-lead')
+            document.querySelectorAll('#journey .journey-eyebrow, #journey .journey-lead, #journey .journey-cta-wrap')
                 .forEach((el) => revealObserver.observe(el));
+        })();
+    </script>
+
+    <!-- =======================================================
+         SPEECH BUBBLE TYPEWRITER EFFECT (beda ritme & cursor
+         sama fun fact di bawah, biar gak sama persis)
+         ======================================================= -->
+    <script>
+        (function () {
+            const bubbleMessages = [
+                '"in another life aku gamau masuk ilmu komputer"',
+                '"when yahh"',
+                '"baru belajar it, saingannya ai"',
+                '"ai bukan hanya alat, tapi budak"',
+                '"tee und zucker"',
+                '"ich vermisse mama so sehr"'
+            ];
+
+            const el = document.getElementById('bubbleText');
+            if (!el) return;
+
+            let msgIndex = 0;
+            let charIndex = 0;
+            let deleting = false;
+
+            const TYPE_SPEED = 55;
+            const DELETE_SPEED = 28;
+            const PAUSE_AFTER_TYPE = 2100;
+            const PAUSE_AFTER_DELETE = 500;
+
+            function tick() {
+                const current = bubbleMessages[msgIndex];
+
+                if (!deleting) {
+                    charIndex++;
+                    el.textContent = current.slice(0, charIndex);
+                    if (charIndex === current.length) {
+                        deleting = true;
+                        setTimeout(tick, PAUSE_AFTER_TYPE);
+                        return;
+                    }
+                    setTimeout(tick, TYPE_SPEED);
+                } else {
+                    charIndex--;
+                    el.textContent = current.slice(0, charIndex);
+                    if (charIndex === 0) {
+                        deleting = false;
+                        msgIndex = (msgIndex + 1) % bubbleMessages.length;
+                        setTimeout(tick, PAUSE_AFTER_DELETE);
+                        return;
+                    }
+                    setTimeout(tick, DELETE_SPEED);
+                }
+            }
+
+            tick();
         })();
     </script>
 
